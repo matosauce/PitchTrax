@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using PitchTrax.Models;
 
 namespace PitchTrax.SQLite
@@ -22,6 +22,33 @@ namespace PitchTrax.SQLite
             _dbConnection.CreateTable<PitcherStatistics>();
             _dbConnection.CreateTable<PitchStatistics>();
             _dbConnection.CreateTable<PitchType>();
+            var types = new List<PitchType>
+            {
+                new PitchType()
+                {
+                    PitchTypeColor = 0,
+                    PitchTypeId = 1,
+                    PitchTypeName = "4-Seam Fastball"
+                },
+                new PitchType()
+                {
+                    PitchTypeColor = 0,
+                    PitchTypeId = 2,
+                    PitchTypeName = "2-Seam Fastball"
+                },
+                new PitchType()
+                {
+                    PitchTypeColor = 0,
+                    PitchTypeId = 3,
+                    PitchTypeName = "Curveball"
+                },
+                new PitchType()
+                {
+                    PitchTypeColor = 0,
+                    PitchTypeId = 1,
+                    PitchTypeName = "Circle Change-up"
+                }
+            };
             _dbConnection.CreateTable<Session>();
         } 
 
