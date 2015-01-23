@@ -49,6 +49,7 @@ namespace PitchTrax.SQLite
                     PitchTypeName = "Circle Change-up"
                 }
             };
+            _dbConnection.InsertAll(types);
             _dbConnection.CreateTable<Session>();
         } 
 

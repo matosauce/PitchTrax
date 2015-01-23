@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using PitchTrax.DAOs;
 using PitchTrax.Models;
+using PitchTrax.SQLite;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -17,20 +17,69 @@ namespace PitchTrax
         public MainPage()
         {
             InitializeComponent();
+            RefreshPitcherList();
         }
 
         private void AddPitcherButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //show blank screen on right
-            //save should call this method later
-            AddButton("New Pitcher", 3);
+            ClearInputs();
         }
 
-        private void AddButton(string name, int pitcherId)
+        private void ClearInputs()
         {
-            var newButton = new Button { Content = name, FontSize = 20, MinHeight = 70, Margin = new Thickness(5), MinWidth = 400, DataContext = pitcherId};
-            newButton.Click += ShowPitcherInfo;
-            PitcherPanel.Children.Add(newButton);
+            PitcherId.Text = "-1";
+            FirstName.Text = string.Empty;
+            LastName.Text = string.Empty;
+
+            LeftRadioButton.IsChecked = false;
+            RightRadioButton.IsChecked = false;
+
+            JerseyNumber.Text = string.Empty;
+            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            var pitchTypeDao = new PitchTypeDAO();
+            var availablePitchTypes = pitchTypeDao.GetAllPitchTypes(connection);
+            if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
+            AvailablePitchTypes.Items.Clear();
+            KnownPitchTypes.Items.Clear();
+            foreach (var t in availablePitchTypes)
+                AvailablePitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId});
+        }
+
+        private void AddPitcherToLeft(Pitcher pitcher)
+        {
+            var pitcherButton = new Button { Content = pitcher.FirstName + " " + pitcher.LastName, FontSize = 20, MinHeight = 70, Margin = new Thickness(5), MinWidth = 400, DataContext = pitcher.PitcherId };
+            pitcherButton.Click += ShowPitcherInfo;
+            var deleteButton = new Button { Content = "Remove", FontSize = 20, MinHeight = 70, Margin = new Thickness(5), MinWidth = 40, DataContext = pitcher.PitcherId };
+            deleteButton.Click += RemovePitcher;
+            var sp = new StackPanel {Orientation = Orientation.Horizontal};
+            sp.Children.Add(pitcherButton);
+            sp.Children.Add(deleteButton);
+            PitcherPanel.Children.Add(sp);
+        }
+
+        private void RemovePitcher(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var pitcherId = (int)button.DataContext;
+            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            var pitcherDao = new PitcherDAO();
+            pitcherDao.DeleteExistingPitcher(connection, pitcherId);
+            RefreshPitcherList();
+        }
+
+        private void RefreshPitcherList()
+        {
+            PitcherPanel.Children.Clear();
+
+            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            var pitcherDao = new PitcherDAO();
+
+            var pitchers = pitcherDao.GetAllPitchers(connection);
+            foreach (var p in pitchers)
+            {
+                AddPitcherToLeft(p);
+            }
         }
 
         private void ShowPitcherInfo(object sender, RoutedEventArgs e)
@@ -43,54 +92,47 @@ namespace PitchTrax
 
         private void FillPitcherData(int pitcherId)
         {
-            //TODO: replace with call to DB using pitcherId
-            var pitcher = new Pitcher
-            {
-                PitcherId = 1,
-                FirstName = "George",
-                LastName = "Costanza",
-                JerseyNumber = 44, 
-                Handedness = 'R',
-                KnownPitches = new List<PitchType>
-                {
-                    new PitchType { PitchTypeId = 1, PitchTypeName = "Fastball" },
-                    new PitchType { PitchTypeId = 2, PitchTypeName = "Curveball" }
-                }
-            };
+            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            var pitcherDao = new PitcherDAO();
+
+            var pitcher = pitcherDao.GetPitcherById(connection, pitcherId);
 
             PitcherId.Text = pitcher.PitcherId.ToString();
             FirstName.Text = pitcher.FirstName;
             LastName.Text = pitcher.LastName;
 
-            if (pitcher.Handedness == 'L')
+            if (pitcher.Handedness == "L")
                 LeftRadioButton.IsChecked = true;
             else
                 RightRadioButton.IsChecked = true;
 
             JerseyNumber.Text = pitcher.JerseyNumber.ToString();
 
-            //TODO: replace with call to DB to get all available pitch types
-            var typesAvailable = new List<PitchType>
-            {
-                new PitchType{PitchTypeId = 1, PitchTypeName = "Fastball"},
-                new PitchType{PitchTypeId = 2, PitchTypeName = "Curveball"},
-                new PitchType{PitchTypeId = 3, PitchTypeName = "Knuckleball"},
-                new PitchType{PitchTypeId = 4, PitchTypeName = "Slider"},
-                new PitchType{PitchTypeId = 5, PitchTypeName = "12-6 Curve"},
-                new PitchType{PitchTypeId = 5, PitchTypeName = "Circle-Change"}
-            };
-
+            ////TODO: replace with call to DB to get all available pitch types
+            //var typesAvailable = new List<PitchType>
+            //{
+            //    new PitchType{PitchTypeId = 1, PitchTypeName = "Fastball"},
+            //    new PitchType{PitchTypeId = 2, PitchTypeName = "Curveball"},
+            //    new PitchType{PitchTypeId = 3, PitchTypeName = "Knuckleball"},
+            //    new PitchType{PitchTypeId = 4, PitchTypeName = "Slider"},
+            //    new PitchType{PitchTypeId = 5, PitchTypeName = "12-6 Curve"},
+            //    new PitchType{PitchTypeId = 5, PitchTypeName = "Circle-Change"}
+            //};
+            var pitchTypeDao = new PitchTypeDAO();
+            var availablePitchTypes = pitchTypeDao.GetAllPitchTypes(connection);
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
-            foreach (var t in typesAvailable)
+            AvailablePitchTypes.Items.Clear();
+            KnownPitchTypes.Items.Clear();
+            foreach (var t in availablePitchTypes)
             {
-                if (pitcher.KnownPitches.Any(x => x.PitchTypeId == t.PitchTypeId))
-                {
-                    KnownPitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName });
-                }
-                else
-                {
-                    AvailablePitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName });
-                }
+            //    if (pitcher.KnownPitches.Any(x => x.PitchTypeId == t.PitchTypeId))
+            //    {
+                //KnownPitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName });
+            //    }
+            //    else
+            //    {
+                AvailablePitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
+            //    }
             }
         }
 
@@ -135,18 +177,28 @@ namespace PitchTrax
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
 
-            var list = new List<PitchType>();//TODO: fill properly with data from UI
             var myPitcher = new Pitcher
             {
                 PitcherId = Convert.ToInt32(PitcherId.Text),
                 FirstName = FirstName.Text,
                 LastName = LastName.Text,
                 JerseyNumber = Convert.ToInt32(JerseyNumber.Text),
-                Handedness = ((LeftRadioButton.IsChecked??false) ? 'L' : 'R'),
-                KnownPitches = list
+                Handedness = ((LeftRadioButton.IsChecked??false) ? "L" : "R")
             };
-            //TODO: Send call to update table in DB
 
+            var pitcherDao = new PitcherDAO();
+            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            if (myPitcher.PitcherId != -1)
+            {
+
+                pitcherDao.ModifyExistingPitcher(connection, myPitcher);
+            }
+            else
+            {
+                pitcherDao.InsertNewPitcher(connection, myPitcher);
+            }
+            RefreshPitcherList();
+            ClearInputs();
         }
 
         private void StartSessionButton_OnClick(object sender, RoutedEventArgs e)

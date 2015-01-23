@@ -24,6 +24,7 @@ namespace PitchTrax.DAOs
         public List<PitchType> GetPitchesKnownByPitcher(SQLiteConnection dbConnection, Pitcher pitcher)
         {
             //dbConnection.Table<PitcherKnowsPitchType>().Where(x => x.PitcherId == pitcher.PitcherId).Select("");
+            throw new Exception();
         }
     }
 }
