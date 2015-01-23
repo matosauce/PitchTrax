@@ -22,10 +22,10 @@ namespace PitchTrax.DAOs
             dbConnection.Insert(newPitcher);
         }
 
-        public void ModifyExistingPitcher(SQLiteConnection dbConnection, int newPitcherId)
+        public void ModifyExistingPitcher(SQLiteConnection dbConnection, Pitcher newPitcher)
         {
-            var oldPitcher = dbConnection.Table<Pitcher>().First(x => x.PitcherId == newPitcherId);
-            oldPitcher.PitcherId = newPitcherId;
+            var oldPitcher = dbConnection.Table<Pitcher>().First(x => x.PitcherId == newPitcher.PitcherId);
+            dbConnection.Update(oldPitcher);
         }
 
         public void DeleteExistingPitcher(SQLiteConnection dbConnection, int pitcherIdToBeDeleted)
