@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using PitchTrax.Controllers;
 using PitchTrax.DAOs;
 using PitchTrax.Models;
 using PitchTrax.SQLite;
@@ -14,6 +15,7 @@ namespace PitchTrax
     /// </summary>
     public sealed partial class MainPage
     {
+        private PitcherController _controller = new PitcherController();
         public MainPage()
         {
             InitializeComponent();
@@ -177,26 +179,9 @@ namespace PitchTrax
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
 
-            var myPitcher = new Pitcher
-            {
-                PitcherId = Convert.ToInt32(PitcherId.Text),
-                FirstName = FirstName.Text,
-                LastName = LastName.Text,
-                JerseyNumber = Convert.ToInt32(JerseyNumber.Text),
-                Handedness = ((LeftRadioButton.IsChecked??false) ? "L" : "R")
-            };
-
-            var pitcherDao = new PitcherDAO();
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
-            if (myPitcher.PitcherId != -1)
-            {
-
-                pitcherDao.ModifyExistingPitcher(connection, myPitcher);
-            }
-            else
-            {
-                pitcherDao.InsertNewPitcher(connection, myPitcher);
-            }
+            _controller.InsertPitcher(PitcherId.Text, FirstName.Text,
+                LastName.Text, JerseyNumber.Text, ((LeftRadioButton.IsChecked ?? false) ? "L" : "R"));
+            
             RefreshPitcherList();
             ClearInputs();
         }

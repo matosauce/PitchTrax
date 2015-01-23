@@ -105,6 +105,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PitcherController.cs" />
     <Compile Include="DAOs\PitcherDAO.cs" />
     <Compile Include="DAOs\PitchTypeDAO.cs" />
     <Compile Include="MainPage.xaml.cs">
