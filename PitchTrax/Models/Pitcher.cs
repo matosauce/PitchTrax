@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
+﻿using PitchTrax.SQLite;
 
 namespace PitchTrax.Models
 {
@@ -17,13 +15,7 @@ namespace PitchTrax.Models
 
         public int JerseyNumber { get; set; }
 
-        public char Handedness { get; set; }
-
-        [ManyToMany(typeof(PitcherKnowsPitchType))]
-        public List<PitchType> KnownPitches { get; set; }
-
-        public List<Session> PreviousSessions { get; set; }
-
-        public List<Pitch> PreviouslyThrownPitches { get; set; } 
+        [MaxLength(1)]
+        public string Handedness { get; set; }
     }
 }

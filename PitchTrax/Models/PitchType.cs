@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
+﻿using PitchTrax.SQLite;
 
 namespace PitchTrax.Models
 {
+    [Table("PitchTypes")]
     public class PitchType
     {
         [PrimaryKey, Unique, AutoIncrement]
@@ -13,10 +12,5 @@ namespace PitchTrax.Models
         public string PitchTypeName { get; set; }
 
         public int PitchTypeColor { get; set; }
-
-        [ManyToMany(typeof(PitcherKnowsPitchType))]
-        public List<Pitcher> Pitchers { get; set; }
-
-        public List<Pitch> PreviouslyThrownPitchesOfThisType { get; set; }
     }
 }

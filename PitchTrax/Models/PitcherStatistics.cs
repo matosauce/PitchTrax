@@ -1,5 +1,4 @@
-﻿using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
+﻿using PitchTrax.SQLite;
 
 namespace PitchTrax.Models
 {
@@ -8,11 +7,7 @@ namespace PitchTrax.Models
         [PrimaryKey, Unique, AutoIncrement]
         public int PitcherStatisticsId { get; set; }
 
-        [ForeignKey(typeof(Pitcher))]
         public string PitcherId { get; set; }
-
-        [OneToOne]
-        public Pitcher Pitcher { get; set; }
 
         public int SessionsThrown { get; set; }
 

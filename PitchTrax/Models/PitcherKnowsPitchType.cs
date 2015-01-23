@@ -1,13 +1,14 @@
-﻿using SQLiteNetExtensions.Attributes;
+﻿using PitchTrax.SQLite;
 
 namespace PitchTrax.Models
 {
     public class PitcherKnowsPitchType
     {
-        [ForeignKey(typeof(PitchType))]
+        [PrimaryKey]
+        public int KnownPitchId { get; set; }
+
         public int PitchTypeId { get; set; }
 
-        [ForeignKey(typeof(Pitcher))]
         public int PitcherId { get; set; }
     }
 }

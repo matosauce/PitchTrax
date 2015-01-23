@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitchTrax", "PitchTrax\Pitc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{EBCCCD27-15E6-4858-A060-68F33A83357F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitchTraxUnitTests", "PitchTraxUnitTests\PitchTraxUnitTests.csproj", "{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,16 +53,6 @@ Global
 		{EBCCCD27-15E6-4858-A060-68F33A83357F}.Release|ARM.ActiveCfg = Release|Any CPU
 		{EBCCCD27-15E6-4858-A060-68F33A83357F}.Release|x64.ActiveCfg = Release|Any CPU
 		{EBCCCD27-15E6-4858-A060-68F33A83357F}.Release|x86.ActiveCfg = Release|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Release|ARM.ActiveCfg = Release|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Release|x64.ActiveCfg = Release|Any CPU
-		{ED556E6B-319E-41EC-8F2A-7EA63E4E4F12}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
