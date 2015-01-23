@@ -4,9 +4,6 @@ PitchTrax/obj/*
 Controllers/bin/*
 Controllers/obj/*
 
-DB/bin/*
-DB/obj/*
-
 PitchTraxUnitTests/bin/*
 PitchTraxUnitTests/obj/*
 

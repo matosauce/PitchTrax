@@ -28,7 +28,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SQLite
+namespace PitchTrax.SQLite
 {
 	public partial class SQLiteAsyncConnection
 	{

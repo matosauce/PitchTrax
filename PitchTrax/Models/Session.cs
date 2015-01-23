@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
-namespace DB.Models
+namespace PitchTrax.Models
 {
     public class Session
     {

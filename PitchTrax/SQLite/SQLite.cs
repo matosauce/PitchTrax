@@ -24,14 +24,13 @@
 #endif
 
 using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
-
 #if USE_CSHARP_SQLITE
 using Sqlite3 = Community.CsharpSqlite.Sqlite3;
 using Sqlite3DatabaseHandle = Community.CsharpSqlite.Sqlite3.sqlite3;
@@ -45,7 +44,7 @@ using Sqlite3DatabaseHandle = System.IntPtr;
 using Sqlite3Statement = System.IntPtr;
 #endif
 
-namespace SQLite
+namespace PitchTrax.SQLite
 {
 	public class SQLiteException : Exception
 	{
