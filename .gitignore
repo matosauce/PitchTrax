@@ -11,3 +11,6 @@ PitchTraxUnitTests/bin/*
 PitchTraxUnitTests/obj/*
 
 packages/*
+
+*.user
+*.suo
