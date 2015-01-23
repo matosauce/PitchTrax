@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PitchTrax.Models;
 using PitchTrax.SQLite;
@@ -17,7 +18,7 @@ namespace PitchTrax.DAOs
             return dbConnection.Table<Pitcher>().First(x => x.PitcherId == pitcherId);
         }
 
-        public void InsertNewPitchers(SQLiteConnection dbConnection, Pitcher newPitcher)
+        public void InsertNewPitcher(SQLiteConnection dbConnection, Pitcher newPitcher)
         {
             dbConnection.Insert(newPitcher);
         }
@@ -25,6 +26,10 @@ namespace PitchTrax.DAOs
         public void ModifyExistingPitcher(SQLiteConnection dbConnection, Pitcher newPitcher)
         {
             var oldPitcher = dbConnection.Table<Pitcher>().First(x => x.PitcherId == newPitcher.PitcherId);
+            if (oldPitcher != null)
+            {
+                oldPitcher = newPitcher;
+            }
             dbConnection.Update(oldPitcher);
         }
 
