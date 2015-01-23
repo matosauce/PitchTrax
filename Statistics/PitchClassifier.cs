@@ -25,7 +25,7 @@ namespace Statistics
             gaussianDistribution.Columns.Add(table.Columns[0].ColumnName);
 
             //columns
-            for (int i = 1; i < table.Columns.Count; i++)
+            for (var i = 1; i < table.Columns.Count; i++)
             {
                 gaussianDistribution.Columns.Add(table.Columns[i].ColumnName + "Mean");
                 gaussianDistribution.Columns.Add(table.Columns[i].ColumnName + "Variance");
@@ -89,7 +89,7 @@ namespace Statistics
                 double finalScore = 0;
                 foreach (var t in subScoreList)
                 {
-                    if (finalScore == 0)
+                    if (finalScore < 0.00001 && finalScore > -0.00001)
                     {
                         finalScore = t;
                         continue;
@@ -103,7 +103,7 @@ namespace Statistics
 
             var maxOne = score.Max(c => c.Value);
             var name = (from c in score
-                where c.Value == maxOne
+                        where Math.Abs(c.Value - maxOne) < 0.0000000001 
                 select c.Key).First();
 
             return name;

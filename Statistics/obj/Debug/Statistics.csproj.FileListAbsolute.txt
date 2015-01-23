@@ -1,0 +1,7 @@
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\bin\Debug\Statistics.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\bin\Debug\Statistics.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\bin\Debug\MathNet.Numerics.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\bin\Debug\MathNet.Numerics.xml
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\obj\Debug\Statistics.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\obj\Debug\Statistics.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\PitchTrax\Statistics\obj\Debug\Statistics.pdb
