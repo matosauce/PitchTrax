@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -20,11 +9,39 @@ namespace PitchTrax
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
+
+        private void AddPitcherButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            AddButton("New Pitcher", 3);
+        }
+
+        private void AddButton(string name, long id)
+        {
+            var newButton = new Button { Content = name, FontSize = 20, MinHeight = 70, Margin = new Thickness(5), MinWidth = 400, DataContext = id};
+            newButton.Click += ShowPitcherInfo;
+            PitcherPanel.Children.Add(newButton);
+        }
+
+        private void ShowPitcherInfo(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var id = (long) button.DataContext;
+            BuildGrid(id);
+        }
+
+        private void BuildGrid(long id)
+        {
+            var pitcherInfoGrid = new Grid();
+            var pitcher = new {Name = "Sample Pitcher", Pitches = new List<string> {"Fastball", "Curve", "Knuckleball"}};
+            pitcherInfoGrid.Children.Add(new TextBlock{Text = pitcher.Name});
+            MainPanel.Children.Add(pitcherInfoGrid);
         }
     }
 }
