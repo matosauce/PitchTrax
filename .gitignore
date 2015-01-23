@@ -1,2 +1,8 @@
 PitchTrax/bin/*
 PitchTrax/obj/*
+
+Controllers/bin/*
+Controllers/obj/*
+
+DB/bin/*
+DB/obj/*

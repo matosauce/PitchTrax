@@ -1,14 +1,7 @@
 ﻿<Application
-    x:Class="DB.App"
+    x:Class="PitchTrax.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DB"
-    xmlns:localData="using:DB.Data">
+    xmlns:local="using:PitchTrax">
 
-    <Application.Resources>
-        <!-- Application-specific resources -->
-
-        <x:String x:Key="AppName">PitchTrax</x:String>
-
-    </Application.Resources>
 </Application>
