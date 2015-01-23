@@ -24,6 +24,11 @@ namespace PitchTrax.Controllers
             return _pitchTypeDao.GetAllPitchTypes(_connection);
         }
 
+        public void DeletePitcher(int id)
+        {
+            _pitcherDao.DeleteExistingPitcher(_connection, id);
+        }
+
         public void InsertPitcher(string id, string firstName, string lastName, string number, string hand)
         {
             var myPitcher = new Pitcher

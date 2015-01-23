@@ -36,7 +36,7 @@ namespace PitchTrax
             RightRadioButton.IsChecked = false;
 
             JerseyNumber.Text = string.Empty;
-            _controller.GetAllPitchTypes();
+            var availablePitchTypes = _controller.GetAllPitchTypes();
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
             AvailablePitchTypes.Items.Clear();
             KnownPitchTypes.Items.Clear();
@@ -61,9 +61,7 @@ namespace PitchTrax
             var button = sender as Button;
             if (button == null) return;
             var pitcherId = (int)button.DataContext;
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
-            var pitcherDao = new PitcherDAO();
-            pitcherDao.DeleteExistingPitcher(connection, pitcherId);
+            _controller.DeletePitcher(pitcherId);
             RefreshPitcherList();
         }
 
