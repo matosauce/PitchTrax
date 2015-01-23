@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PitchTrax.DAOs;
 using PitchTrax.Models;
 using PitchTrax.SQLite;
@@ -7,13 +8,20 @@ namespace PitchTrax.Controllers
 {
     public class PitcherController
     {
-        private PitcherDAO _pitcherDao;
-        private SQLiteConnection _connection;
+        private readonly PitcherDAO _pitcherDao;
+        private readonly SQLiteConnection _connection;
+        private readonly PitchTypeDAO _pitchTypeDao;
 
         public PitcherController()
         {
             _connection  = new PitchTraxDatabase().GetAsyncConnection();
+            _pitchTypeDao = new PitchTypeDAO();
             _pitcherDao = new PitcherDAO();
+        }
+
+        public List<PitchType> GetAllPitchTypes()
+        {
+            return _pitchTypeDao.GetAllPitchTypes(_connection);
         }
 
         public void InsertPitcher(string id, string firstName, string lastName, string number, string hand)
@@ -27,16 +35,14 @@ namespace PitchTrax.Controllers
                 Handedness = hand
             };
 
-            var pitcherDao = new PitcherDAO();
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
             if (myPitcher.PitcherId != -1)
             {
 
-                pitcherDao.ModifyExistingPitcher(connection, myPitcher);
+                _pitcherDao.ModifyExistingPitcher(_connection, myPitcher);
             }
             else
             {
-                pitcherDao.InsertNewPitcher(connection, myPitcher);
+                _pitcherDao.InsertNewPitcher(_connection, myPitcher);
             }
         }
     }

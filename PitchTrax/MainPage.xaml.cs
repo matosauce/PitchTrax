@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using PitchTrax.Controllers;
 using PitchTrax.DAOs;
@@ -15,7 +14,7 @@ namespace PitchTrax
     /// </summary>
     public sealed partial class MainPage
     {
-        private PitcherController _controller = new PitcherController();
+        private readonly PitcherController _controller = new PitcherController();
         public MainPage()
         {
             InitializeComponent();
@@ -37,9 +36,7 @@ namespace PitchTrax
             RightRadioButton.IsChecked = false;
 
             JerseyNumber.Text = string.Empty;
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
-            var pitchTypeDao = new PitchTypeDAO();
-            var availablePitchTypes = pitchTypeDao.GetAllPitchTypes(connection);
+            _controller.GetAllPitchTypes();
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
             AvailablePitchTypes.Items.Clear();
             KnownPitchTypes.Items.Clear();
