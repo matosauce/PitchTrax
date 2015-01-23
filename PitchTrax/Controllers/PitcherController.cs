@@ -24,6 +24,16 @@ namespace PitchTrax.Controllers
             return _pitchTypeDao.GetAllPitchTypes(_connection);
         }
 
+        public List<Pitcher> GetAllPitchers()
+        {
+            return _pitcherDao.GetAllPitchers(_connection);
+        }
+
+        public Pitcher GetPitcherById(int id)
+        {
+            return _pitcherDao.GetPitcherById(_connection, id);
+        }
+
         public void DeletePitcher(int id)
         {
             _pitcherDao.DeleteExistingPitcher(_connection, id);

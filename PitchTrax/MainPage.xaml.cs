@@ -1,9 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using PitchTrax.Controllers;
-using PitchTrax.DAOs;
 using PitchTrax.Models;
-using PitchTrax.SQLite;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -69,10 +67,7 @@ namespace PitchTrax
         {
             PitcherPanel.Children.Clear();
 
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
-            var pitcherDao = new PitcherDAO();
-
-            var pitchers = pitcherDao.GetAllPitchers(connection);
+            var pitchers = _controller.GetAllPitchers();
             foreach (var p in pitchers)
             {
                 AddPitcherToLeft(p);
@@ -89,10 +84,7 @@ namespace PitchTrax
 
         private void FillPitcherData(int pitcherId)
         {
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
-            var pitcherDao = new PitcherDAO();
-
-            var pitcher = pitcherDao.GetPitcherById(connection, pitcherId);
+            var pitcher = _controller.GetPitcherById(pitcherId);
 
             PitcherId.Text = pitcher.PitcherId.ToString();
             FirstName.Text = pitcher.FirstName;
@@ -115,8 +107,7 @@ namespace PitchTrax
             //    new PitchType{PitchTypeId = 5, PitchTypeName = "12-6 Curve"},
             //    new PitchType{PitchTypeId = 5, PitchTypeName = "Circle-Change"}
             //};
-            var pitchTypeDao = new PitchTypeDAO();
-            var availablePitchTypes = pitchTypeDao.GetAllPitchTypes(connection);
+            var availablePitchTypes = _controller.GetAllPitchTypes();
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
             AvailablePitchTypes.Items.Clear();
             KnownPitchTypes.Items.Clear();

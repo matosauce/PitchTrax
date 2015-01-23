@@ -105,6 +105,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\LineFitting.cs" />
+    <Compile Include="Controllers\MathFunction.cs" />
+    <Compile Include="Controllers\PitchClassifier.cs" />
     <Compile Include="Controllers\PitcherController.cs" />
     <Compile Include="DAOs\PitcherDAO.cs" />
     <Compile Include="DAOs\PitchTypeDAO.cs" />
@@ -146,7 +149,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
@@ -154,6 +156,12 @@
     <SDKReference Include="SQLite.WinRT81, Version=3.8.8.1">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.5.0\lib\portable-net45+netcore45+MonoAndroid1+MonoTouch1\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
