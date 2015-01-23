@@ -39,6 +39,7 @@ namespace PitchTrax
         private void BuildGrid(long id)
         {
             var pitcherInfoGrid = new Grid();
+            //TODO: replace with call to DB using id
             var pitcher = new {Name = "Sample Pitcher", Pitches = new List<string> {"Fastball", "Curve", "Knuckleball"}};
             pitcherInfoGrid.Children.Add(new TextBlock{Text = pitcher.Name});
             MainPanel.Children.Add(pitcherInfoGrid);
