@@ -6,3 +6,5 @@ Controllers/obj/*
 
 DB/bin/*
 DB/obj/*
+
+packages/*
