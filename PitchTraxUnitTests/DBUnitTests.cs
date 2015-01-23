@@ -1,23 +1,17 @@
-﻿using DB;
+﻿using System.IO;
+using DB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SQLite;
 
 namespace PitchTraxUnitTests
 {
     [TestClass]
     public class DBUnitTests
     {
-        //[TestMethod]
-        //public void TestDatabaseConnection()
-        //{
-        //    try
-        //    {
-        //        var connection = new SQLiteConnection("Data Source=PitchTrax.db;");
-
-        //    } catch (SQLiteException)
-        //    {
-        //        Assert.Fail();
-        //    }
-            
-        //}
+        [TestMethod]
+        public void TestDatabaseConnection()
+        {
+            var conn = new SQLiteAsyncConnection("entries");    
+        }
     }
 }
