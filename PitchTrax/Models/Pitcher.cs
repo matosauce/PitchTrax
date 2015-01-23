@@ -19,8 +19,8 @@ namespace PitchTrax.Models
 
         public char Handedness { get; set; }
 
-        [ManyToMany(typeof(PitchType))]
-        public List<Pitcher> KnownPitches { get; set; }
+        [ManyToMany(typeof(PitcherKnowsPitchType))]
+        public List<PitchType> KnownPitches { get; set; }
 
         public List<Session> PreviousSessions { get; set; }
 

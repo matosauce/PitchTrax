@@ -5,16 +5,56 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
     <StackPanel Name="MainPanel"  Orientation="Horizontal" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ScrollViewer>
             <StackPanel x:Name="PitcherPanel" Orientation="Vertical" MinWidth="600" Background="DimGray">
-                <StackPanel Orientation="Horizontal" Margin="0,80,0,40">
+                <StackPanel Orientation="Horizontal" Margin="0,70,0,40">
                     <TextBlock Text="Pitchers" MinWidth="350" FontSize="40" TextAlignment="Left" Margin="5,0,0,0"/>
                     <Button Content="Add Pitcher" MinWidth="100" Margin="50,0,0,0" Click="AddPitcherButton_OnClick"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        
+        <ScrollViewer>
+            <Grid Margin="10,70,0,0" Name="PitcherInfoGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="500"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="70"></RowDefinition>
+                    <RowDefinition  Height="70"></RowDefinition>
+                    <RowDefinition  Height="90"></RowDefinition>
+                    <RowDefinition  Height="70"></RowDefinition>
+                    <RowDefinition  Height="70"></RowDefinition>
+                    <RowDefinition  Height="70"></RowDefinition>
+                    <RowDefinition  Height="500"></RowDefinition>
+                    <RowDefinition  Height="70"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Name="PitcherId" Text="SHIT BOOMNIGGA KAPOWEE" Margin="-100"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="40" Margin="0,10" Text="First Name" />
+                <TextBox Grid.Row="0" Grid.Column="1" Name="FirstName" FontSize="20" IsEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15" Width="400"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" FontSize="40" Margin="0,10" Text="Last Name" />
+                <TextBox Grid.Row="1" Grid.Column="1" Name="LastName" FontSize="20" IsEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15" Width="400"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Handedness" Margin="0,10" FontSize="40" />
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="5,10">
+                    <RadioButton Name="RightRadioButton"  GroupName="Handedness" Content="Right" />
+                    <RadioButton Name="LeftRadioButton"  GroupName="Handedness" Content="Left" />
+                </StackPanel>
+                <TextBlock Grid.Row="3" Grid.Column="0" FontSize="40" Margin="0,10" Text="Jersey Number" />
+                <TextBox Grid.Row="3" Grid.Column="1" Name="JerseyNumber" FontSize="20" IsEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15" Width="400"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" FontSize="40" Margin="0,10" Text="Pitches" />
+                <TextBlock Grid.Row="5" Grid.Column="0" FontSize="30" Margin="0,10" Text="Available" />
+                <TextBlock Grid.Row="5" Grid.Column="1" FontSize="30" Margin="0,10" Text="Known" />
+                <ListBox Grid.Row="6" Grid.Column="0" Name="AvailablePitchTypes" Width="300" SelectionMode="Multiple"/>
+                <ListBox Grid.Row="6" Grid.Column="1" Name="KnownPitchTypes" Width="300" HorizontalAlignment="Left" SelectionMode="Multiple"/>
+                <Button Grid.Row="7" Grid.Column="0"  Name="AddPitchTypeButton" Content="Add &gt;" HorizontalAlignment="Right" MinWidth="120" Click="AddPitchTypeButton_OnClick" />
+                <Button Grid.Row="7" Grid.Column="1"  Name="RemovePitchTypeButton" Content="&lt; Remove" HorizontalAlignment="Left" MinWidth="120" Click="RemovePitchTypeButton_OnClick"/>
+                <Button Grid.Row="6" Grid.Column="2"  Name="SaveButton" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" MinWidth="120" Click="SaveButton_OnClick"/>
+
+                <Button Grid.Row="7" Grid.Column="2"  Name="StartSessionButton" Content="Start Session" HorizontalAlignment="Left" MinWidth="120" Click="StartSessionButton_OnClick" />
+            </Grid>
+        </ScrollViewer>
     </StackPanel>
 </Page>
