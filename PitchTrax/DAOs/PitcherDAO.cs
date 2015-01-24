@@ -7,35 +7,42 @@ namespace PitchTrax.DAOs
 {
     public class PitcherDAO
     {
-        public List<Pitcher> GetAllPitchers(SQLiteConnection dbConnection)
+        private readonly SQLiteConnection _dbConnection;
+
+        public PitcherDAO(SQLiteConnection dbConnection)
         {
-            return dbConnection.Table<Pitcher>().ToList();
+            this._dbConnection = dbConnection;
         }
 
-        public Pitcher GetPitcherById(SQLiteConnection dbConnection, int pitcherId)
+        public List<Pitcher> GetAllPitchers()
         {
-            return dbConnection.Table<Pitcher>().First(x => x.PitcherId == pitcherId);
+            return _dbConnection.Table<Pitcher>().ToList();
         }
 
-        public void InsertNewPitcher(SQLiteConnection dbConnection, Pitcher newPitcher)
+        public Pitcher GetPitcherById(int pitcherId)
         {
-            dbConnection.Insert(newPitcher);
+            return _dbConnection.Table<Pitcher>().First(x => x.PitcherId == pitcherId);
         }
 
-        public void ModifyExistingPitcher(SQLiteConnection dbConnection, Pitcher newPitcher)
+        public void InsertNewPitcher(Pitcher newPitcher)
         {
-            var oldPitcher = dbConnection.Table<Pitcher>().First(x => x.PitcherId == newPitcher.PitcherId);
+            _dbConnection.Insert(newPitcher);
+        }
+
+        public void ModifyExistingPitcher(Pitcher newPitcher)
+        {
+            var oldPitcher = _dbConnection.Table<Pitcher>().First(x => x.PitcherId == newPitcher.PitcherId);
             if (oldPitcher != null)
             {
                 oldPitcher = newPitcher;
             }
-            dbConnection.Update(oldPitcher);
+            _dbConnection.Update(oldPitcher);
         }
 
-        public void DeleteExistingPitcher(SQLiteConnection dbConnection, int pitcherIdToBeDeleted)
+        public void DeleteExistingPitcher(int pitcherIdToBeDeleted)
         {
-            var pitcherToBeDeleted = dbConnection.Table<Pitcher>().First(x => x.PitcherId == pitcherIdToBeDeleted);
-            dbConnection.Delete(pitcherToBeDeleted);
+            var pitcherToBeDeleted = _dbConnection.Table<Pitcher>().First(x => x.PitcherId == pitcherIdToBeDeleted);
+            _dbConnection.Delete(pitcherToBeDeleted);
         }
     }
 }

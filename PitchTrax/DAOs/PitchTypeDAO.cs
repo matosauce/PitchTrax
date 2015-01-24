@@ -8,21 +8,29 @@ namespace PitchTrax.DAOs
 {
     class PitchTypeDAO
     {
-        public List<PitchType> GetAllPitchTypes(SQLiteConnection dbConnection)
+
+        private readonly SQLiteConnection _dbConnection;
+
+        public PitchTypeDAO(SQLiteConnection dbConnection)
         {
-            return dbConnection.Table<PitchType>().ToList();
+            this._dbConnection = dbConnection;
         }
 
-        public void TeachPitcherNewPitch(SQLiteConnection dbConnection, Pitcher pitcher, PitchType type)
+        public List<PitchType> GetAllPitchTypes()
+        {
+            return _dbConnection.Table<PitchType>().ToList();
+        }
+
+        public void TeachPitcherNewPitch(Pitcher pitcher, PitchType type)
         {
             var taughtPitch = new PitcherKnowsPitchType {PitchTypeId = type.PitchTypeId, PitcherId = pitcher.PitcherId};
-            dbConnection.Insert(taughtPitch);
+            _dbConnection.Insert(taughtPitch);
         }
 
-        public List<PitchType> GetPitchesKnownByPitcher(SQLiteConnection dbConnection, Pitcher pitcher)
-        {
-            //dbConnection.Table<PitcherKnowsPitchType>().Where(x => x.PitcherId == pitcher.PitcherId).Select("");
-            throw new Exception();
-        }
+       //public List<PitchType> GetPitchesKnownByPitcher(Pitcher pitcher)
+        //{
+        //    //dbConnection.Table<PitcherKnowsPitchType>().Where(x => x.PitcherId == pitcher.PitcherId).Select("");
+        //    throw new Exception();
+        //}
     }
 }

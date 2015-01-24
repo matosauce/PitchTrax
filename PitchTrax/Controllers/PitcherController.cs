@@ -9,34 +9,33 @@ namespace PitchTrax.Controllers
     public class PitcherController
     {
         private readonly PitcherDAO _pitcherDao;
-        private readonly SQLiteConnection _connection;
         private readonly PitchTypeDAO _pitchTypeDao;
 
         public PitcherController()
         {
-            _connection  = new PitchTraxDatabase().GetAsyncConnection();
-            _pitchTypeDao = new PitchTypeDAO();
-            _pitcherDao = new PitcherDAO();
+            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            _pitchTypeDao = new PitchTypeDAO(connection);
+            _pitcherDao = new PitcherDAO(connection);
         }
 
         public List<PitchType> GetAllPitchTypes()
         {
-            return _pitchTypeDao.GetAllPitchTypes(_connection);
+            return _pitchTypeDao.GetAllPitchTypes();
         }
 
         public List<Pitcher> GetAllPitchers()
         {
-            return _pitcherDao.GetAllPitchers(_connection);
+            return _pitcherDao.GetAllPitchers();
         }
 
         public Pitcher GetPitcherById(int id)
         {
-            return _pitcherDao.GetPitcherById(_connection, id);
+            return _pitcherDao.GetPitcherById(id);
         }
 
         public void DeletePitcher(int id)
         {
-            _pitcherDao.DeleteExistingPitcher(_connection, id);
+            _pitcherDao.DeleteExistingPitcher(id);
         }
 
         public void InsertPitcher(string id, string firstName, string lastName, string number, string hand)
@@ -53,11 +52,11 @@ namespace PitchTrax.Controllers
             if (myPitcher.PitcherId != -1)
             {
 
-                _pitcherDao.ModifyExistingPitcher(_connection, myPitcher);
+                _pitcherDao.ModifyExistingPitcher(myPitcher);
             }
             else
             {
-                _pitcherDao.InsertNewPitcher(_connection, myPitcher);
+                _pitcherDao.InsertNewPitcher(myPitcher);
             }
         }
     }

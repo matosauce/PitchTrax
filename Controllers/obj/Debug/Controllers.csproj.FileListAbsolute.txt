@@ -1,0 +1,7 @@
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\bin\Debug\Controllers.dll
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\bin\Debug\Controllers.pdb
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\bin\Debug\MathNet.Numerics.dll
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\bin\Debug\MathNet.Numerics.xml
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\obj\Debug\Controllers.dll
+D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\Controllers\obj\Debug\Controllers.pdb
