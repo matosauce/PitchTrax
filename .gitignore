@@ -1,8 +1,8 @@
 PitchTrax/bin/*
 PitchTrax/obj/*
 
-Controllers/bin/*
-Controllers/obj/*
+Statistics/bin/*
+Statistics/obj/*
 
 PitchTraxUnitTests/bin/*
 PitchTraxUnitTests/obj/*
