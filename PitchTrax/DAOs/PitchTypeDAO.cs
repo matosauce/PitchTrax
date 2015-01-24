@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using PitchTrax.Models;
 using PitchTrax.SQLite;
 
 namespace PitchTrax.DAOs
 {
-    class PitchTypeDAO
+    class PitchTypeDao
     {
 
         private readonly SQLiteConnection _dbConnection;
 
-        public PitchTypeDAO(SQLiteConnection dbConnection)
+        public PitchTypeDao(SQLiteConnection dbConnection)
         {
-            this._dbConnection = dbConnection;
+            _dbConnection = dbConnection;
         }
 
         public List<PitchType> GetAllPitchTypes()

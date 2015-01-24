@@ -8,14 +8,14 @@ namespace PitchTrax.Controllers
 {
     public class PitcherController
     {
-        private readonly PitcherDAO _pitcherDao;
-        private readonly PitchTypeDAO _pitchTypeDao;
+        private readonly PitcherDao _pitcherDao;
+        private readonly PitchTypeDao _pitchTypeDao;
 
         public PitcherController()
         {
             var connection = new PitchTraxDatabase().GetAsyncConnection();
-            _pitchTypeDao = new PitchTypeDAO(connection);
-            _pitcherDao = new PitcherDAO(connection);
+            _pitchTypeDao = new PitchTypeDao(connection);
+            _pitcherDao = new PitcherDao(connection);
         }
 
         public List<PitchType> GetAllPitchTypes()

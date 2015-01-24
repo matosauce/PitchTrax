@@ -57,8 +57,5 @@ namespace PitchTrax.SQLite
         {
             return _dbConnection;
         }
-
-  
-
     }
 }

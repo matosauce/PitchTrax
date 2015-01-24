@@ -11,3 +11,6 @@ packages/*
 
 *.user
 *.suo
+
+StatisticsTests/bin/*
+StatisticsTests/obj/*

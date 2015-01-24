@@ -5,13 +5,13 @@ using PitchTrax.SQLite;
 
 namespace PitchTrax.DAOs
 {
-    public class PitcherDAO
+    public class PitcherDao
     {
         private readonly SQLiteConnection _dbConnection;
 
-        public PitcherDAO(SQLiteConnection dbConnection)
+        public PitcherDao(SQLiteConnection dbConnection)
         {
-            this._dbConnection = dbConnection;
+            _dbConnection = dbConnection;
         }
 
         public List<Pitcher> GetAllPitchers()
