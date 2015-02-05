@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using PitchTrax.Controllers;
 using PitchTrax.Models;
@@ -101,16 +102,18 @@ namespace PitchTrax
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
             AvailablePitchTypes.Items.Clear();
             KnownPitchTypes.Items.Clear();
-            foreach (var t in availablePitchTypes)
+            var apt = availablePitchTypes.ToList();
+            foreach (var t in apt)
             {
-            //    if (pitcher.KnownPitches.Any(x => x.PitchTypeId == t.PitchTypeId))
-            //    {
-                //KnownPitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName });
-            //    }
-            //    else
-            //    {
-                AvailablePitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
-            //    }
+                var knownPitchTypes = _controller.GetPitchTypesKnownByPitcher(pitcherId);
+                if (knownPitchTypes.Any(x => x.PitchTypeId == t.PitchTypeId))
+                {
+                    KnownPitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
+                }
+                else
+                {
+                    AvailablePitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
+                }
             }
         }
 
@@ -157,7 +160,15 @@ namespace PitchTrax
 
             _controller.InsertPitcher(PitcherId.Text, FirstName.Text,
                 LastName.Text, JerseyNumber.Text, ((LeftRadioButton.IsChecked ?? false) ? "L" : "R"));
-            
+
+            var knownPitchIds = KnownPitchTypes.Items.Select(x =>
+            {
+                var listBoxItem = x as ListBoxItem;
+                return listBoxItem != null ? (int)listBoxItem.DataContext : 0;
+            }).ToList();
+
+            _controller.SaveNewPitchTypesToPitcher(PitcherId.Text, knownPitchIds);
+
             RefreshPitcherList();
             ClearInputs();
         }
