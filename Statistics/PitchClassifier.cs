@@ -8,7 +8,7 @@ namespace Statistics
     //http://www.codeproject.com/Articles/318126/Naive-Bayes-Classifier
     public class PitchClassifier
     {
-        private DataSet _dataSet = new DataSet();
+        private DataSet _dataSet;
 
         public DataSet DataSet
         {
@@ -32,10 +32,9 @@ namespace Statistics
             }
 
             //calc data
-            var results = (from myRow in table.AsEnumerable()
-                group myRow by myRow.Field<string>(table.Columns[0].ColumnName)
-                into g
-                select new {Name = g.Key, Count = g.Count()}).ToList();
+            var results = (table.AsEnumerable()
+                .GroupBy(myRow => myRow.Field<string>(table.Columns[0].ColumnName))
+                .Select(g => new {Name = g.Key, Count = g.Count()})).ToList();
 
             foreach (var t in results)
             {
@@ -66,11 +65,8 @@ namespace Statistics
         {
             var score = new Dictionary<string, double>();
 
-            var results = (from myRow in _dataSet.Tables[0].AsEnumerable()
-                group myRow by myRow.Field<string>(
-                    _dataSet.Tables[0].Columns[0].ColumnName)
-                into g
-                select new {Name = g.Key, Count = g.Count()}).ToList();
+            var results = (_dataSet.Tables[0].AsEnumerable().GroupBy(myRow => myRow.Field<string>(
+                _dataSet.Tables[0].Columns[0].ColumnName)).Select(g => new {Name = g.Key, Count = g.Count()})).ToList();
 
             for (var i = 0; i < results.Count; i++)
             {
@@ -102,9 +98,7 @@ namespace Statistics
             }
 
             var maxOne = score.Max(c => c.Value);
-            var name = (from c in score
-                        where Math.Abs(c.Value - maxOne) < 0.0000000001 
-                select c.Key).First();
+            var name = (score.Where(c => Math.Abs(c.Value - maxOne) < 0.0000000001).Select(c => c.Key)).First();
 
             return name;
         }
