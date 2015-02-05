@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Windows.UI.Core.AnimationMetrics;
 using PitchTrax.Models;
 using PitchTrax.SQLite;
 
@@ -54,6 +56,12 @@ namespace PitchTrax.DAOs
                 Zone = zone,
             });
         }
+
+        public IEnumerable<Pitch> GetPitchesForStatisticsScreen(int pitcherId, int pitchTypeId)
+        {
+            return _pitches
+                .Where(x => x.PitcherId == pitcherId && x.PitchTypeId == pitchTypeId);
+        } 
 
     }
 }

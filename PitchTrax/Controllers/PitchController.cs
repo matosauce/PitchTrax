@@ -33,6 +33,11 @@ namespace PitchTrax.Controllers
         public IEnumerable<Pitch> GetAllPitchesThrownByOnePitcherInOneSessionOfOnePitchType(int pitcherId, int pitchTypeId, int sessionId)
         {
             return _pitchDao.GetAllPitchesThrownByPitcherOfOnePitchTypeInOneSession(pitcherId, pitchTypeId, sessionId);
+        }
+
+        public IEnumerable<Pitch> GetPitchesForStatisticsScreen(int pitcherId, int pitchTypeId)
+        {
+            return _pitchDao.GetPitchesForStatisticsScreen(pitcherId, pitchTypeId);
         } 
 
     }
