@@ -8,15 +8,12 @@ namespace PitchTrax.Controllers
 {
     public class SessionController
     {
-
         private readonly SessionDao _sessionDao;
-        private readonly PitchDao _pitchDao;
 
         public SessionController()
         {
             var connection = new PitchTraxDatabase().GetConnection();
             _sessionDao = new SessionDao(connection);
-            _pitchDao = new PitchDao(connection);
         }
 
         public IEnumerable<Session> GetAllSessions()
