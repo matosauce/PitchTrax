@@ -34,10 +34,10 @@ namespace PitchTrax.DAOs
             _dbConnection.Delete(KnownPitchFactory(type.PitchTypeId, pitcher.PitcherId));
         }
 
-       public IEnumerable<PitchType> GetPitchesKnownByPitcher(Pitcher pitcher)
+       public IEnumerable<PitchType> GetPitchesKnownByPitcher(int pitcherId)
        {
            var knownPitchTypeIds = _knownPitchTypes
-                .Where(x => x.PitcherId == pitcher.PitcherId)
+                .Where(x => x.PitcherId == pitcherId)
                 .Select(x => x.PitchTypeId);
 
            return _pitchTypes

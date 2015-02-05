@@ -33,6 +33,11 @@ namespace PitchTrax.Controllers
             return _pitcherDao.GetPitcherById(id);
         }
 
+        public IEnumerable<PitchType> GetPitchTypesKnownByPitcher(int pitcherId)
+        {
+            return _pitchTypeDao.GetPitchesKnownByPitcher(pitcherId);
+        } 
+
         public void DeletePitcher(int id)
         {
             _pitcherDao.DeleteExistingPitcher(id);
