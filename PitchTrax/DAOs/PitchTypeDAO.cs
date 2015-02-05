@@ -24,14 +24,9 @@ namespace PitchTrax.DAOs
                 .ToList();
         }
 
-        public void TeachPitcherNewPitch(Pitcher pitcher, PitchType type)
+        public void UpdateKnownPitchTypes(Pitcher pitcher, IEnumerable<int> types)
         {
-            _dbConnection.Insert(KnownPitchFactory(type.PitchTypeId, pitcher.PitcherId));
-        }
-
-        public void RemovePitchFromPitcher(Pitcher pitcher, PitchType type)
-        {
-            _dbConnection.Delete(KnownPitchFactory(type.PitchTypeId, pitcher.PitcherId));
+            _dbConnection.InsertAll(KnownPitchFactory(types, pitcher.PitcherId));
         }
 
        public IEnumerable<PitchType> GetPitchesKnownByPitcher(int pitcherId)
@@ -45,13 +40,13 @@ namespace PitchTrax.DAOs
                    .Contains(x.PitchTypeId));
        }
 
-        private static PitcherKnowsPitchType KnownPitchFactory(int pitchTypeId, int pitcherId)
+        private static IEnumerable<PitcherKnowsPitchType> KnownPitchFactory(IEnumerable<int> pitchTypeIds, int pitcherId)
         {
-            return new PitcherKnowsPitchType
+            return pitchTypeIds.Select(typeId => new PitcherKnowsPitchType
             {
-                PitchTypeId = pitchTypeId,
-                PitcherId = pitcherId
-            };
+                PitcherId = pitcherId,
+                PitchTypeId = typeId
+            });
         }
     }
 }
