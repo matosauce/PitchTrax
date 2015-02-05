@@ -70,9 +70,7 @@ namespace PitchTrax
 
             var pitchers = _controller.GetAllPitchers();
             foreach (var p in pitchers)
-            {
                 AddPitcherToLeft(p);
-            }
         }
 
         private void ShowPitcherInfo(object sender, RoutedEventArgs e)
@@ -107,13 +105,9 @@ namespace PitchTrax
             {
                 
                 if (knownPitchTypes.Any(x => x.PitchTypeId == t.PitchTypeId))
-                {
                     KnownPitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
-                }
                 else
-                {
                     AvailablePitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
-                }
             }
         }
 
