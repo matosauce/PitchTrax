@@ -10,7 +10,7 @@ namespace PitchTrax.DAOs
     {
         
         private readonly SQLiteConnection _dbConnection;
-        private readonly TableQuery<Session> _sessions;
+        private readonly IEnumerable<Session> _sessions;
 
         public SessionDao(SQLiteConnection dbConnection)
         {
@@ -20,8 +20,7 @@ namespace PitchTrax.DAOs
 
         public IEnumerable<Session> GetAllSessions()
         {
-            return _sessions
-                .ToList();
+            return _sessions;
         }
 
         public Session GetSessionById(int sessionId)

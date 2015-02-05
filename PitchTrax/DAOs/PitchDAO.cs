@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Windows.UI.Core.AnimationMetrics;
 using PitchTrax.Models;
 using PitchTrax.SQLite;
 
@@ -10,7 +9,7 @@ namespace PitchTrax.DAOs
     {
 
         private readonly SQLiteConnection _dbConnection;
-        private readonly TableQuery<Pitch> _pitches;
+        private readonly IEnumerable<Pitch> _pitches;
 
         public PitchDao(SQLiteConnection dbConnection)
         {
@@ -60,7 +59,8 @@ namespace PitchTrax.DAOs
         public IEnumerable<Pitch> GetPitchesForStatisticsScreen(int pitcherId, int pitchTypeId)
         {
             return _pitches
-                .Where(x => x.PitcherId == pitcherId && x.PitchTypeId == pitchTypeId);
+                .Where(x => x.PitcherId == pitcherId)
+                .Where(x => x.PitchTypeId == pitchTypeId);
         } 
 
     }

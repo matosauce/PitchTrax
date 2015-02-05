@@ -9,9 +9,9 @@ namespace PitchTrax.DAOs
     public class PitcherDao
     {
         private readonly SQLiteConnection _dbConnection;
-        private readonly TableQuery<Pitcher> _pitchers;
-        private readonly TableQuery<Session> _sessions;
-        private readonly TableQuery<Pitch> _pitches; 
+        private readonly IEnumerable<Pitcher> _pitchers;
+        private readonly IEnumerable<Session> _sessions;
+        private readonly IEnumerable<Pitch> _pitches; 
 
         public PitcherDao(SQLiteConnection dbConnection)
         {
@@ -23,8 +23,7 @@ namespace PitchTrax.DAOs
 
         public IEnumerable<Pitcher> GetAllPitchers()
         {
-            return _pitchers
-                .ToList();
+            return _pitchers;
         }
 
         public Pitcher GetPitcherById(int pitcherId)

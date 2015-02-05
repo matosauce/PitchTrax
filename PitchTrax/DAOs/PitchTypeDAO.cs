@@ -8,8 +8,8 @@ namespace PitchTrax.DAOs
     public class PitchTypeDao
     {
         private readonly SQLiteConnection _dbConnection;
-        private readonly TableQuery<PitchType> _pitchTypes;
-        private readonly TableQuery<PitcherKnowsPitchType> _knownPitchTypes; 
+        private readonly IEnumerable<PitchType> _pitchTypes;
+        private readonly IEnumerable<PitcherKnowsPitchType> _knownPitchTypes; 
 
         public PitchTypeDao(SQLiteConnection dbConnection)
         {
@@ -20,8 +20,7 @@ namespace PitchTrax.DAOs
 
         public IEnumerable<PitchType> GetAllPitchTypes()
         {
-            return _pitchTypes
-                .ToList();
+            return _pitchTypes;
         }
 
         public void UpdateKnownPitchTypes(int pitcherId, IEnumerable<int> types)
@@ -32,12 +31,12 @@ namespace PitchTrax.DAOs
        public IEnumerable<PitchType> GetPitchesKnownByPitcher(int pitcherId)
        {
            var knownPitchTypeIds = _knownPitchTypes
-                .Where(x => x.PitcherId == pitcherId)
-                .ToList();
+               .Where(x => x.PitcherId == pitcherId)
+               .Select(x => x.PitchTypeId);
            //We had to break this into two parts because somehow we were getting back zeros for data.
-           var ids = knownPitchTypeIds.Select(x => x.PitchTypeId);
+           //var ids = knownPitchTypeIds.Select();
            return _pitchTypes
-               .Where(x => ids
+               .Where(x => knownPitchTypeIds
                    .Contains(x.PitchTypeId));
        }
 
