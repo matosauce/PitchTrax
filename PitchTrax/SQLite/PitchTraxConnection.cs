@@ -43,8 +43,20 @@ namespace PitchTrax.SQLite
                 new PitchType
                 {
                     PitchTypeColor = 0,
-                    PitchTypeId = 1,
+                    PitchTypeId = 4,
                     PitchTypeName = "Circle Change-up"
+                },
+                new PitchType
+                {
+                    PitchTypeColor = 0,
+                    PitchTypeId = 5,
+                    PitchTypeName = "Splitter"
+                },
+                new PitchType
+                {
+                    PitchTypeColor = 0,
+                    PitchTypeId = 6,
+                    PitchTypeName = "Slider"
                 }
             };
             _dbConnection.CreateTable<PitchType>();
