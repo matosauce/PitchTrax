@@ -5,7 +5,7 @@ namespace PitchTrax.Models
     [Table("PitchTypes")]
     public class PitchType
     {
-        [PrimaryKey, Unique, AutoIncrement]
+        [PrimaryKey, Unique]
         public int PitchTypeId { get; set; }
 
         [NotNull]
