@@ -5,31 +5,53 @@ using PitchTrax.SQLite;
 
 namespace PitchTrax.DAOs
 {
-    class PitchTypeDao
+    public class PitchTypeDao
     {
-
         private readonly SQLiteConnection _dbConnection;
+        private readonly TableQuery<PitchType> _pitchTypes;
+        private readonly TableQuery<PitcherKnowsPitchType> _knownPitchTypes; 
 
         public PitchTypeDao(SQLiteConnection dbConnection)
         {
             _dbConnection = dbConnection;
+            _pitchTypes = dbConnection.Table<PitchType>();
+            _knownPitchTypes = dbConnection.Table<PitcherKnowsPitchType>();
         }
 
-        public List<PitchType> GetAllPitchTypes()
+        public IEnumerable<PitchType> GetAllPitchTypes()
         {
-            return _dbConnection.Table<PitchType>().ToList();
+            return _pitchTypes
+                .ToList();
         }
 
         public void TeachPitcherNewPitch(Pitcher pitcher, PitchType type)
         {
-            var taughtPitch = new PitcherKnowsPitchType {PitchTypeId = type.PitchTypeId, PitcherId = pitcher.PitcherId};
-            _dbConnection.Insert(taughtPitch);
+            _dbConnection.Insert(KnownPitchFactory(type.PitchTypeId, pitcher.PitcherId));
         }
 
-       //public List<PitchType> GetPitchesKnownByPitcher(Pitcher pitcher)
-        //{
-        //    //dbConnection.Table<PitcherKnowsPitchType>().Where(x => x.PitcherId == pitcher.PitcherId).Select("");
-        //    throw new Exception();
-        //}
+        public void RemovePitchFromPitcher(Pitcher pitcher, PitchType type)
+        {
+            _dbConnection.Delete(KnownPitchFactory(type.PitchTypeId, pitcher.PitcherId));
+        }
+
+       public IEnumerable<PitchType> GetPitchesKnownByPitcher(Pitcher pitcher)
+       {
+           var knownPitchTypeIds = _knownPitchTypes
+                .Where(x => x.PitcherId == pitcher.PitcherId)
+                .Select(x => x.PitchTypeId);
+
+           return _pitchTypes
+               .Where(x => knownPitchTypeIds
+                   .Contains(x.PitchTypeId));
+       }
+
+        private static PitcherKnowsPitchType KnownPitchFactory(int pitchTypeId, int pitcherId)
+        {
+            return new PitcherKnowsPitchType
+            {
+                PitchTypeId = pitchTypeId,
+                PitcherId = pitcherId
+            };
+        }
     }
 }

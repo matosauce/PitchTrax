@@ -4,8 +4,8 @@ PitchTrax/obj/*
 Statistics/bin/*
 Statistics/obj/*
 
-PitchTraxUnitTests/bin/*
-PitchTraxUnitTests/obj/*
+ClassifierTests/bin/*
+ClassifierTests/obj/*
 
 packages/*
 

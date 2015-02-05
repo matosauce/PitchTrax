@@ -11,5 +11,13 @@ namespace PitchTrax.Models
         public int PitchTypeId { get; set; }
 
         public int PitcherId { get; set; }
+
+        public int SessionId { get; set; }
+
+        public int Velocity { get; set; }
+
+        public int XCoordinate { get; set; }
+
+        public int YCoordinate { get; set; }
     }
 }

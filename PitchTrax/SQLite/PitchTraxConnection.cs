@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PitchTrax.Models;
 
 namespace PitchTrax.SQLite
@@ -19,41 +20,43 @@ namespace PitchTrax.SQLite
             _dbConnection.CreateTable<Pitch>();
             _dbConnection.CreateTable<Pitcher>();
             _dbConnection.CreateTable<PitcherKnowsPitchType>();
-            _dbConnection.CreateTable<PitcherStatistics>();
-            _dbConnection.CreateTable<PitchStatistics>();
-            _dbConnection.CreateTable<PitchType>();
             var types = new List<PitchType>
             {
-                new PitchType()
+                new PitchType
                 {
                     PitchTypeColor = 0,
                     PitchTypeId = 1,
                     PitchTypeName = "4-Seam Fastball"
                 },
-                new PitchType()
+                new PitchType
                 {
                     PitchTypeColor = 0,
                     PitchTypeId = 2,
                     PitchTypeName = "2-Seam Fastball"
                 },
-                new PitchType()
+                new PitchType
                 {
                     PitchTypeColor = 0,
                     PitchTypeId = 3,
                     PitchTypeName = "Curveball"
                 },
-                new PitchType()
+                new PitchType
                 {
                     PitchTypeColor = 0,
                     PitchTypeId = 1,
                     PitchTypeName = "Circle Change-up"
                 }
             };
+            _dbConnection.CreateTable<PitchType>();
+            if (_dbConnection.Table<PitchType>().Any())
+                _dbConnection.DeleteAll<PitchType>();
+
             _dbConnection.InsertAll(types);
+
             _dbConnection.CreateTable<Session>();
         } 
 
-        public SQLiteConnection GetAsyncConnection()
+        public SQLiteConnection GetConnection()
         {
             return _dbConnection;
         }

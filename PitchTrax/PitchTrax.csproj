@@ -106,16 +106,17 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\PitcherController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="DAOs\PitchDAO.cs" />
     <Compile Include="DAOs\PitcherDAO.cs" />
     <Compile Include="DAOs\PitchTypeDAO.cs" />
+    <Compile Include="DAOs\SessionDAO.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Pitch.cs" />
     <Compile Include="Models\Pitcher.cs" />
     <Compile Include="Models\PitcherKnowsPitchType.cs" />
-    <Compile Include="Models\PitcherStatistics.cs" />
-    <Compile Include="Models\PitchStatistics.cs" />
     <Compile Include="Models\PitchType.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

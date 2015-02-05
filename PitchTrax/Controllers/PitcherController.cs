@@ -13,17 +13,17 @@ namespace PitchTrax.Controllers
 
         public PitcherController()
         {
-            var connection = new PitchTraxDatabase().GetAsyncConnection();
+            var connection = new PitchTraxDatabase().GetConnection();
             _pitchTypeDao = new PitchTypeDao(connection);
             _pitcherDao = new PitcherDao(connection);
         }
 
-        public List<PitchType> GetAllPitchTypes()
+        public IEnumerable<PitchType> GetAllPitchTypes()
         {
             return _pitchTypeDao.GetAllPitchTypes();
         }
 
-        public List<Pitcher> GetAllPitchers()
+        public IEnumerable<Pitcher> GetAllPitchers()
         {
             return _pitcherDao.GetAllPitchers();
         }
@@ -50,14 +50,9 @@ namespace PitchTrax.Controllers
             };
 
             if (myPitcher.PitcherId != -1)
-            {
-
                 _pitcherDao.ModifyExistingPitcher(myPitcher);
-            }
             else
-            {
                 _pitcherDao.InsertNewPitcher(myPitcher);
-            }
         }
     }
 }
