@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using PitchTrax.DAOs;
 using PitchTrax.Models;
@@ -10,10 +11,10 @@ namespace PitchTraxDataAccessUnitTests
     public class PitcherDaoTests
     {
 
-        internal SQLiteConnection _dbConnection;
+        internal static SQLiteConnection _dbConnection;
 
         [ClassInitialize]
-        public void SetUpForTests()
+        public static void SetUpForTests(TestContext tc)
         {
             _dbConnection = new SQLiteConnection(Windows.Storage.ApplicationData.Current.LocalFolder.Path + @"\PitchTraxTest.db");
         }
