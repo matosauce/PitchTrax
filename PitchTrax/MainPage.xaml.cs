@@ -97,16 +97,6 @@ namespace PitchTrax
 
             JerseyNumber.Text = pitcher.JerseyNumber.ToString();
 
-            ////TODO: replace with call to DB to get all available pitch types
-            //var typesAvailable = new List<PitchType>
-            //{
-            //    new PitchType{PitchTypeId = 1, PitchTypeName = "Fastball"},
-            //    new PitchType{PitchTypeId = 2, PitchTypeName = "Curveball"},
-            //    new PitchType{PitchTypeId = 3, PitchTypeName = "Knuckleball"},
-            //    new PitchType{PitchTypeId = 4, PitchTypeName = "Slider"},
-            //    new PitchType{PitchTypeId = 5, PitchTypeName = "12-6 Curve"},
-            //    new PitchType{PitchTypeId = 5, PitchTypeName = "Circle-Change"}
-            //};
             var availablePitchTypes = _controller.GetAllPitchTypes();
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
             AvailablePitchTypes.Items.Clear();
@@ -174,7 +164,7 @@ namespace PitchTrax
 
         private void StartSessionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO: Start the Session Screen
+            Frame.Navigate(typeof (SessionPage));
         }
     }
 }
