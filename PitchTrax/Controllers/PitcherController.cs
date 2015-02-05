@@ -45,7 +45,7 @@ namespace PitchTrax.Controllers
 
         public void SaveNewPitchTypesToPitcher(int pitcherId, IEnumerable<int> pitchTypeIds)
         {
-            _pitchTypeDao.UpdateKnownPitchTypes(pitcherId, pitchTypeIds);
+            _pitchTypeDao.UpdateKnownPitchTypes(Convert.ToInt32(pitcherId), pitchTypeIds);
         } 
 
         public void InsertPitcher(string id, string firstName, string lastName, string number, string hand)
