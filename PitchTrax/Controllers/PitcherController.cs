@@ -43,6 +43,11 @@ namespace PitchTrax.Controllers
             _pitcherDao.DeleteExistingPitcher(id);
         }
 
+        public void SaveNewPitchTypesToPitcher(int pitcherId, IEnumerable<int> pitchTypeIds)
+        {
+            _pitchTypeDao.UpdateKnownPitchTypes(pitcherId, pitchTypeIds);
+        } 
+
         public void InsertPitcher(string id, string firstName, string lastName, string number, string hand)
         {
             var myPitcher = new Pitcher

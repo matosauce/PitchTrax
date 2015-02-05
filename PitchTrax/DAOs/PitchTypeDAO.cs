@@ -24,9 +24,9 @@ namespace PitchTrax.DAOs
                 .ToList();
         }
 
-        public void UpdateKnownPitchTypes(Pitcher pitcher, IEnumerable<int> types)
+        public void UpdateKnownPitchTypes(int pitcherId, IEnumerable<int> types)
         {
-            _dbConnection.InsertAll(KnownPitchFactory(types, pitcher.PitcherId));
+            _dbConnection.InsertAll(KnownPitchFactory(types, pitcherId));
         }
 
        public IEnumerable<PitchType> GetPitchesKnownByPitcher(int pitcherId)

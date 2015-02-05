@@ -95,6 +95,9 @@
     <AppxPackagedFile Include="D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\PitchTrax\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\PitchTrax\bin\x86\Debug\SessionPage.xbf">
+      <PackagePath>SessionPage.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\PitchTrax\bin\x86\Debug\PitchTrax.xr.xml">
       <PackagePath>PitchTrax.xr.xml</PackagePath>
     </AppxPackagedFile>
