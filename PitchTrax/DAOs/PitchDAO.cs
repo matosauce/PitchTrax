@@ -44,16 +44,14 @@ namespace PitchTrax.DAOs
                 .Where(x => x.SessionId == sessionId);
         }
 
-        public void ThrowNewPitch(int pitcherId, int pitchTypeId, int sessionId, int velocity, int xCoord,
-            int yCoord)
+        public void ThrowNewPitch(int pitcherId, int pitchTypeId, int sessionId, int velocity, int zone)
         {
             _dbConnection.Insert(new Pitch
             {
                 PitcherId = pitcherId,
                 SessionId = sessionId,
                 Velocity = velocity,
-                Zone = xCoord,
-                YCoordinate = yCoord
+                Zone = zone,
             });
         }
 
