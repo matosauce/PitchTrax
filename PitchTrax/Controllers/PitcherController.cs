@@ -23,6 +23,8 @@ namespace PitchTrax.Controllers
             return _pitchTypeDao.GetAllPitchTypes();
         }
 
+
+
         public IEnumerable<Pitcher> GetAllPitchers()
         {
             return _pitcherDao.GetAllPitchers();
@@ -48,7 +50,7 @@ namespace PitchTrax.Controllers
             _pitchTypeDao.UpdateKnownPitchTypes(Convert.ToInt32(pitcherId), pitchTypeIds);
         } 
 
-        public void InsertPitcher(string id, string firstName, string lastName, string number, string hand)
+        public int InsertPitcher(string id, string firstName, string lastName, string number, string hand)
         {
             var myPitcher = new Pitcher
             {
@@ -60,9 +62,8 @@ namespace PitchTrax.Controllers
             };
 
             if (myPitcher.PitcherId != -1)
-                _pitcherDao.ModifyExistingPitcher(myPitcher);
-            else
-                _pitcherDao.InsertNewPitcher(myPitcher);
+                return _pitcherDao.ModifyExistingPitcher(myPitcher);
+            return _pitcherDao.InsertNewPitcher(myPitcher);
         }
     }
 }

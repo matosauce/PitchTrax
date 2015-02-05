@@ -33,17 +33,23 @@ namespace PitchTrax.DAOs
                 .First(x => x.PitcherId == pitcherId);
         }
 
-        public void InsertNewPitcher(Pitcher newPitcher)
+        public int InsertNewPitcher(Pitcher newPitcher)
         {
             _dbConnection.Insert(newPitcher);
+            return _pitchers
+                .Select(x => x.PitcherId)
+                .Last();
         }
 
-        public void ModifyExistingPitcher(Pitcher newPitcher)
+        public int ModifyExistingPitcher(Pitcher newPitcher)
         {
             var oldPitcher = _pitchers.First(x => x.PitcherId == newPitcher.PitcherId);
             if (oldPitcher != null)
                 oldPitcher = newPitcher;
             _dbConnection.Update(oldPitcher);
+            return _pitchers
+                .First(x => x.PitcherId == newPitcher.PitcherId)
+                .PitcherId;
         }
 
         public void DeleteExistingPitcher(int pitcherIdToBeDeleted)

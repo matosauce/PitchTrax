@@ -16,8 +16,8 @@ namespace PitchTrax.Models
 
         public int Velocity { get; set; }
 
-        public int XCoordinate { get; set; }
+        public int Zone { get; set; }
 
-        public int YCoordinate { get; set; }
+        public int Break { get; set; }
     }
 }

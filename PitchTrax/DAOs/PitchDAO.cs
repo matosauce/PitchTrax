@@ -52,7 +52,7 @@ namespace PitchTrax.DAOs
                 PitcherId = pitcherId,
                 SessionId = sessionId,
                 Velocity = velocity,
-                XCoordinate = xCoord,
+                Zone = xCoord,
                 YCoordinate = yCoord
             });
         }
