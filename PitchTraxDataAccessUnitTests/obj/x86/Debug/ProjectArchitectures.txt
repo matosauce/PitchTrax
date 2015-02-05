@@ -1,2 +1,0 @@
-D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\PitchTrax\PitchTrax.csproj;x86
-D:\MyDocs\Documents\Visual Studio 2013\Projects\PitchTrax\PitchTraxDataAccessUnitTests\PitchTraxDataAccessUnitTests.csproj;x86

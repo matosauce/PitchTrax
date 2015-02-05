@@ -14,3 +14,6 @@ packages/*
 
 StatisticsTests/bin/*
 StatisticsTests/obj/*
+
+PitchTraxDataAccessUnitTests/bin/*
+PitchTraxDataAccessUnitTests/obj/*
