@@ -33,11 +33,13 @@ namespace PitchTrax.DAOs
        {
            var knownPitchTypeIds = _knownPitchTypes
                 .Where(x => x.PitcherId == pitcherId)
-                .Select(x => x.PitchTypeId);
-
-           return _pitchTypes
-               .Where(x => knownPitchTypeIds
+                .ToList();
+           //We had to break this into two parts because somehow we were getting back zeros for data.
+           var ids = knownPitchTypeIds.Select(x => x.PitchTypeId);
+           var stuff = _pitchTypes
+               .Where(x => ids
                    .Contains(x.PitchTypeId));
+           return stuff;
        }
 
         private static IEnumerable<PitcherKnowsPitchType> KnownPitchFactory(IEnumerable<int> pitchTypeIds, int pitcherId)

@@ -102,10 +102,10 @@ namespace PitchTrax
             if (AvailablePitchTypes.Items == null || KnownPitchTypes.Items == null) return;
             AvailablePitchTypes.Items.Clear();
             KnownPitchTypes.Items.Clear();
-            var apt = availablePitchTypes.ToList();
-            foreach (var t in apt)
+            var knownPitchTypes = _controller.GetPitchTypesKnownByPitcher(pitcherId).ToList();
+            foreach (var t in availablePitchTypes)
             {
-                var knownPitchTypes = _controller.GetPitchTypesKnownByPitcher(pitcherId);
+                
                 if (knownPitchTypes.Any(x => x.PitchTypeId == t.PitchTypeId))
                 {
                     KnownPitchTypes.Items.Add(new ListBoxItem { Content = t.PitchTypeName, DataContext = t.PitchTypeId });
@@ -158,7 +158,7 @@ namespace PitchTrax
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
 
-            _controller.InsertPitcher(PitcherId.Text, FirstName.Text,
+            var pitcherId = _controller.InsertPitcher(PitcherId.Text, FirstName.Text,
                 LastName.Text, JerseyNumber.Text, ((LeftRadioButton.IsChecked ?? false) ? "L" : "R"));
 
             var knownPitchIds = KnownPitchTypes.Items.Select(x =>
@@ -167,7 +167,7 @@ namespace PitchTrax
                 return listBoxItem != null ? (int)listBoxItem.DataContext : 0;
             }).ToList();
 
-            _controller.SaveNewPitchTypesToPitcher(PitcherId.Text, knownPitchIds);
+            _controller.SaveNewPitchTypesToPitcher(pitcherId.ToString(), knownPitchIds);
 
             RefreshPitcherList();
             ClearInputs();
