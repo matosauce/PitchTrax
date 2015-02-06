@@ -162,7 +162,7 @@ namespace PitchTrax
                 return listBoxItem != null ? (int)listBoxItem.DataContext : 0;
             }).ToList();
 
-            _controller.SaveNewPitchTypesToPitcher(pitcherId.ToString(), knownPitchIds);
+            _controller.SaveNewPitchTypesToPitcher(pitcherId, knownPitchIds);
 
             RefreshPitcherList();
             ClearInputs();

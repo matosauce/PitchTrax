@@ -40,7 +40,7 @@ namespace PitchTrax.Controllers
             return _pitchDao.GetPitchesForStatisticsScreen(pitcherId, pitchTypeId);
         }
 
-        public int ThrowNewPitch(int pitcherId, int pitchTypeId, int sessionId, int velocity, int zone, int breakAmount)
+        public Pitch ThrowNewPitch(int pitcherId, int pitchTypeId, int sessionId, int velocity, int zone, int breakAmount)
         {
             return _pitchDao.ThrowNewPitch(pitcherId, pitchTypeId, sessionId, velocity, zone, breakAmount);
         }
