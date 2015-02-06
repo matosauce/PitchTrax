@@ -45,5 +45,10 @@ namespace PitchTrax.Controllers
             return _pitchDao.ThrowNewPitch(pitcherId, pitchTypeId, sessionId, velocity, zone, breakAmount);
         }
 
+        public PitchType GetPitchTypeByPitchId(int pitchId)
+        {
+            return _pitchDao.GetPitchTypeByPitchId(pitchId);
+        }
+
     }
 }
