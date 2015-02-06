@@ -10,11 +10,13 @@ namespace PitchTrax.DAOs
 
         private readonly SQLiteConnection _dbConnection;
         private readonly IEnumerable<Pitch> _pitches;
+        private readonly IEnumerable<PitchType> _pitchTypes; 
 
         public PitchDao(SQLiteConnection dbConnection)
         {
             _dbConnection = dbConnection;
             _pitches = _dbConnection.Table<Pitch>();
+            _pitchTypes = _dbConnection.Table<PitchType>();
         }
 
         public IEnumerable<Pitch> GetAllPitchesThrownByPitcher(int pitcherId)
@@ -56,6 +58,16 @@ namespace PitchTrax.DAOs
                 Break = breakAmount
             });
             return _pitches.Last();
+        }
+
+        public PitchType GetPitchTypeByPitchId(int pitchId)
+        {
+            var pitchTypeid =  _pitches
+                .Where(x => x.PitchId == pitchId)
+                .Select(x => x.PitchTypeId);
+
+            return _pitchTypes
+                .First(x => pitchTypeid.Contains(x.PitchTypeId));
         }
 
         public IEnumerable<Pitch> GetPitchesForStatisticsScreen(int pitcherId, int pitchTypeId)
