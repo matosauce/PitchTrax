@@ -21,6 +21,7 @@ namespace PitchTrax
         {
             InitializeComponent();
             RefreshPitcherList();
+            ClearInputs();
         }
 
         private void AddPitcherButton_OnClick(object sender, RoutedEventArgs e)
@@ -167,7 +168,6 @@ namespace PitchTrax
             _controller.SaveNewPitchTypesToPitcher(pitcherId, knownPitchIds);
 
             RefreshPitcherList();
-            ClearInputs();
         }
 
         private void StartSessionButton_OnClick(object sender, RoutedEventArgs e)
@@ -175,6 +175,13 @@ namespace PitchTrax
             var pitcherId = Convert.ToInt32(PitcherId.Text);
             if(pitcherId != ErrorInt)
                 Frame.Navigate(typeof(SessionPage), pitcherId);
+        }
+
+        private void StatisticsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var pitcherId = Convert.ToInt32(PitcherId.Text);
+            if (pitcherId != ErrorInt)
+                Frame.Navigate(typeof(PitchTrends), pitcherId);
         }
     }
 }

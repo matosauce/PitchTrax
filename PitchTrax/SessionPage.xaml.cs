@@ -117,11 +117,12 @@ namespace PitchTrax
         private void UpdateSessionHistoryPanel(Pitch pitch)
         {
             const int fontSize = 30;
+            const int indexAfterHeader = 1;
 
             var oldInt = Convert.ToInt32(NumberOfPitchesTextBlock.Text) + 1;
             NumberOfPitchesTextBlock.Text = oldInt.ToString();
 
-            var pitchType = new PitchType();
+            var pitchType = _pitchController.GetPitchTypeByPitchId(pitch.PitchId);
 
             var pitchTypeNameTextBlock = new TextBlock
             {
@@ -133,7 +134,7 @@ namespace PitchTrax
 
             var velocityTextBlock = new TextBlock
             {
-                Text = pitch.Velocity + " MPH",
+                Text = pitch.Velocity == ErrorInt ? "n/a" : pitch.Velocity + " MPH",
                 FontSize = fontSize,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Right
@@ -143,7 +144,7 @@ namespace PitchTrax
             pitchGrid.Children.Add(pitchTypeNameTextBlock);
             pitchGrid.Children.Add(velocityTextBlock);
 
-            SessionHistoryPanel.Children.Insert(0, pitchGrid);
+            SessionHistoryPanel.Children.Insert(1, pitchGrid);
         }
 
         private static int GetZoneNumber(Button button)

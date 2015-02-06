@@ -52,8 +52,11 @@
                 <ListBox Grid.Row="6" Grid.Column="1" Name="KnownPitchTypes" Width="300" HorizontalAlignment="Left" SelectionMode="Multiple"/>
                 <Button Grid.Row="7" Grid.Column="0"  Name="AddPitchTypeButton" Content="Add &gt;" HorizontalAlignment="Right" MinWidth="120" Click="AddPitchTypeButton_OnClick" />
                 <Button Grid.Row="7" Grid.Column="1"  Name="RemovePitchTypeButton" Content="&lt; Remove" HorizontalAlignment="Left" MinWidth="120" Click="RemovePitchTypeButton_OnClick"/>
-                <Button Grid.Row="6" Grid.Column="2"  Name="SaveButton" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" MinWidth="120" Click="SaveButton_OnClick"/>
-
+                <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Vertical" VerticalAlignment="Bottom">
+                    <Button Name="SaveButton" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" MinWidth="120" Click="SaveButton_OnClick"/>
+                    <Button Name="StatisticsButton" Content="Statistics" HorizontalAlignment="Left" MinWidth="120" Click="StatisticsButton_OnClick" />
+                </StackPanel>
+                
                 <Button Grid.Row="7" Grid.Column="2"  Name="StartSessionButton" Content="Start Session" HorizontalAlignment="Left" MinWidth="120" Click="StartSessionButton_OnClick" />
             </Grid>
         </ScrollViewer>

@@ -61,7 +61,12 @@
                 <TextBlock HorizontalAlignment="Right" FontSize="30" Text="0" Name="NumberOfPitchesTextBlock"/>
             </Grid>
             <ScrollViewer Height="850" >
-                <StackPanel Name="SessionHistoryPanel"></StackPanel>
+                <StackPanel Name="SessionHistoryPanel">
+                    <Grid Margin="0,0,0,10">
+                        <TextBlock FontSize="30" Text="Type" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <TextBlock FontSize="30" Text="Velocity" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    </Grid>
+                </StackPanel>
             </ScrollViewer>
             <Button Width="500" Height="100" Content="Close Session" FontSize="30" Name="CloseSessionButton" Click="CloseSessionButton_OnClick"/>
         </StackPanel>
