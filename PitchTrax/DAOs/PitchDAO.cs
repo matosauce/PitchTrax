@@ -52,6 +52,7 @@ namespace PitchTrax.DAOs
             _dbConnection.Insert(new Pitch
             {
                 PitcherId = pitcherId,
+                PitchTypeId = pitchTypeId,
                 SessionId = sessionId,
                 Velocity = velocity,
                 Zone = zone,
