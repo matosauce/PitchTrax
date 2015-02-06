@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using PitchTrax.Controllers;
 using PitchTrax.Models;
@@ -17,14 +18,11 @@ namespace PitchTrax
         private readonly PitchController _controller = new PitchController();
         private readonly PitcherController _pitcherController = new PitcherController();
         private int _pitcherId;
-        private readonly List<PitchType> _knownPitchesTypes; 
+        private List<PitchType> _knownPitchesTypes; 
 
         public PitchTrends()
         {
             InitializeComponent();
-            _knownPitchesTypes = _pitcherController.GetPitchTypesKnownByPitcher(_pitcherId).ToList();
-            LoadComboBoxes();
-            LoadChartContents();
         }
 
         private void LoadChartContents()
@@ -50,10 +48,14 @@ namespace PitchTrax
             {
                 _pitcherId = (int) e.Parameter;
             }
-            if (_pitcherId == -1)
-            {
-                Frame.Navigate(typeof (MainPage));
-            }
+            
+            _knownPitchesTypes = _pitcherController.GetPitchTypesKnownByPitcher(_pitcherId).ToList();
+            LoadComboBoxes();
+        }
+
+        private void Type_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadChartContents();
         }
     }
 }
