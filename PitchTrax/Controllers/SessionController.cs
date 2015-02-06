@@ -42,9 +42,9 @@ namespace PitchTrax.Controllers
             return _sessionDao.GetSessionById(sessionId);
         }
 
-        public void CreateNewSession(int pitcherId, DateTime date)
+        public int CreateNewSession(int pitcherId, DateTime date)
         {
-            _sessionDao.CreateNewSession(pitcherId, date);
+            return _sessionDao.CreateNewSession(pitcherId, date);
         }
 
     }

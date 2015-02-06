@@ -50,13 +50,14 @@ namespace PitchTrax.DAOs
                 .Where(x => x.PitcherId == pitcherId);
         }
 
-        public void CreateNewSession(int pitcherId, DateTime date)
+        public int CreateNewSession(int pitcherId, DateTime date)
         {
             _dbConnection.Insert(new Session
             {
                 PitcherId = pitcherId,
                 SessionDate = date
             });
+            return _sessions.Last().SessionId;
         }
     }
 }

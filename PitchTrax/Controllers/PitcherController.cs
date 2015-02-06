@@ -23,8 +23,6 @@ namespace PitchTrax.Controllers
             return _pitchTypeDao.GetAllPitchTypes();
         }
 
-
-
         public IEnumerable<Pitcher> GetAllPitchers()
         {
             return _pitcherDao.GetAllPitchers();
