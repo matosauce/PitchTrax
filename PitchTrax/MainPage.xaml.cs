@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using PitchTrax.Controllers;
@@ -169,7 +170,7 @@ namespace PitchTrax
 
         private void StartSessionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (SessionPage));
+            Frame.Navigate(typeof (SessionPage), Convert.ToInt32(PitcherId.Text));
         }
     }
 }
