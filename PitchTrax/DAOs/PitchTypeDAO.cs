@@ -25,6 +25,14 @@ namespace PitchTrax.DAOs
 
         public void UpdateKnownPitchTypes(int pitcherId, IEnumerable<int> types)
         {
+            var toBeDeletedPitchTypes = _knownPitchTypes
+                .Where(x => x.PitcherId == pitcherId)
+                .Select(x => x.KnownPitchId);
+
+            foreach (var knownPitch in toBeDeletedPitchTypes)
+            {
+                _dbConnection.Delete<PitcherKnowsPitchType>(knownPitch);
+            }
             _dbConnection.InsertAll(KnownPitchFactory(types, pitcherId));
         }
 
