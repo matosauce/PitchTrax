@@ -14,6 +14,8 @@ namespace PitchTrax
     /// </summary>
     public sealed partial class MainPage
     {
+        private const int ErrorInt = -1;
+
         private readonly PitcherController _controller = new PitcherController();
         public MainPage()
         {
@@ -28,7 +30,7 @@ namespace PitchTrax
 
         private void ClearInputs()
         {
-            PitcherId.Text = "-1";
+            PitcherId.Text = ErrorInt.ToString();
             FirstName.Text = string.Empty;
             LastName.Text = string.Empty;
 
@@ -170,7 +172,9 @@ namespace PitchTrax
 
         private void StartSessionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (SessionPage), Convert.ToInt32(PitcherId.Text));
+            var pitcherId = Convert.ToInt32(PitcherId.Text);
+            if(pitcherId != ErrorInt)
+                Frame.Navigate(typeof(SessionPage), pitcherId);
         }
     }
 }

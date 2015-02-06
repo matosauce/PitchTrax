@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using PitchTrax.Controllers;
 using PitchTrax.Models;
+using WinRTXamlToolkit.Controls.Extensions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -19,7 +20,6 @@ namespace PitchTrax
         private int _sessionId;
 
         private const int ErrorInt = -1;
-
 
         private SessionController _sessionController;
         private PitchController _pitchController;
@@ -110,16 +110,40 @@ namespace PitchTrax
                 breakAmount = ErrorInt;
             }
 
-            var pitchId = _pitchController.ThrowNewPitch(_pitcherId, pitchTypeId, _sessionId, velocity, zone, breakAmount);
-            UpdateSessionHistoryPanel(pitchId);
+            var pitch = _pitchController.ThrowNewPitch(_pitcherId, pitchTypeId, _sessionId, velocity, zone, breakAmount);
+            UpdateSessionHistoryPanel(pitch);
         }
 
-        private void UpdateSessionHistoryPanel(int pitchId)
+        private void UpdateSessionHistoryPanel(Pitch pitch)
         {
+            const int fontSize = 30;
+
             var oldInt = Convert.ToInt32(NumberOfPitchesTextBlock.Text) + 1;
             NumberOfPitchesTextBlock.Text = oldInt.ToString();
 
+            var pitchType = new PitchType();
+
+            var pitchTypeNameTextBlock = new TextBlock
+            {
+                Text = pitchType.PitchTypeName,
+                FontSize = fontSize,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left
+            };
+
+            var velocityTextBlock = new TextBlock
+            {
+                Text = pitch.Velocity + " MPH",
+                FontSize = fontSize,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
             
+            var pitchGrid = new Grid();
+            pitchGrid.Children.Add(pitchTypeNameTextBlock);
+            pitchGrid.Children.Add(velocityTextBlock);
+
+            SessionHistoryPanel.Children.Insert(0, pitchGrid);
         }
 
         private static int GetZoneNumber(Button button)
@@ -135,7 +159,7 @@ namespace PitchTrax
 
         private void CloseSessionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Frame.Navigate(typeof (MainPage));
         }
     }
 }
