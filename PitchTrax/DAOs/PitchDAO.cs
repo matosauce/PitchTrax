@@ -45,7 +45,7 @@ namespace PitchTrax.DAOs
                 .Where(x => x.SessionId == sessionId);
         }
 
-        public int ThrowNewPitch(int pitcherId, int pitchTypeId, int sessionId, int velocity, int zone, int breakAmount)
+        public Pitch ThrowNewPitch(int pitcherId, int pitchTypeId, int sessionId, int velocity, int zone, int breakAmount)
         {
             _dbConnection.Insert(new Pitch
             {
@@ -55,7 +55,7 @@ namespace PitchTrax.DAOs
                 Zone = zone,
                 Break = breakAmount
             });
-            return _pitches.Last().PitchId;
+            return _pitches.Last();
         }
 
         public IEnumerable<Pitch> GetPitchesForStatisticsScreen(int pitcherId, int pitchTypeId)

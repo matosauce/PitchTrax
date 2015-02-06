@@ -53,6 +53,7 @@ namespace PitchTrax.DAOs
 
         public void DeleteExistingPitcher(int pitcherIdToBeDeleted)
         {
+
             _dbConnection.Delete(_pitchers.First(x => x.PitcherId == pitcherIdToBeDeleted));
         }
 
