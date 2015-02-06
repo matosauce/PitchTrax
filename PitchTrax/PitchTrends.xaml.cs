@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 using PitchTrax.Controllers;
 using PitchTrax.Models;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
@@ -29,10 +30,27 @@ namespace PitchTrax
         {
             var pitches = _controller.GetPitchesForStatisticsScreen(_pitcherId, 
                 _knownPitchesTypes.Single(x => x.PitchTypeName == (string)Type.SelectedItem).PitchTypeId).ToList();
-
             var lineSeries = LineChart.Series[0] as LineSeries;
-            if (lineSeries != null)
-                lineSeries.ItemsSource = pitches.Select(x => x.Velocity);
+            if (lineSeries == null) return;
+
+            if ((string) Statistic.SelectedItem == "Velocity")
+            {
+                SetAxis(lineSeries, "Velocity");
+                lineSeries.ItemsSource =
+                    pitches.Select((pitch, index) => new {Index = index + 1, pitch.Velocity}).ToList();
+            }
+            else if ((string) Statistic.SelectedItem == "Break")
+            {
+                SetAxis(lineSeries, "Break");
+                lineSeries.ItemsSource =
+                    pitches.Select((pitch, index) => new { Index = index + 1, pitch.Break }).ToList();
+            }
+        }
+
+        private static void SetAxis(LineSeries series, string dependent)
+        {
+            series.DependentValuePath = dependent;
+            series.IndependentValuePath = "Index";
         }
 
         private void LoadComboBoxes()
@@ -53,9 +71,20 @@ namespace PitchTrax
             LoadComboBoxes();
         }
 
-        private void Type_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Statistic_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoadChartContents();
+            if (Type.SelectedItem != null)
+            {
+                LoadChartContents();
+            }
+        }
+
+        private void Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Statistic.SelectedItem != null)
+            {
+                LoadChartContents();
+            }
         }
     }
 }
