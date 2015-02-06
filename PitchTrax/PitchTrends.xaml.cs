@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Xaml.Navigation;
 using PitchTrax.Controllers;
 using PitchTrax.Models;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
@@ -15,15 +16,21 @@ namespace PitchTrax
     {
         private readonly PitchController _controller = new PitchController();
         private readonly PitcherController _pitcherController = new PitcherController();
+        private int _pitcherId;
+        private readonly List<PitchType> _knownPitchesTypes; 
 
         public PitchTrends()
         {
             InitializeComponent();
+            _knownPitchesTypes = _pitcherController.GetPitchTypesKnownByPitcher(_pitcherId).ToList();
+            LoadComboBoxes();
+            LoadChartContents();
         }
 
         private void LoadChartContents()
         {
-            var pitches = _controller.GetPitchesForStatisticsScreen(0, 0).ToList();
+            var pitches = _controller.GetPitchesForStatisticsScreen(_pitcherId, 
+                _knownPitchesTypes.Single(x => x.PitchTypeName == (string)Type.SelectedItem).PitchTypeId).ToList();
 
             var lineSeries = LineChart.Series[0] as LineSeries;
             if (lineSeries != null)
@@ -32,8 +39,21 @@ namespace PitchTrax
 
         private void LoadComboBoxes()
         {
-            Type.ItemsSource = _pitcherController.GetPitchTypesKnownByPitcher(0);
+            Type.ItemsSource = _knownPitchesTypes.Select(x => x.PitchTypeName).ToList();
             Statistic.ItemsSource = new List<string> {"Velocity", "Break"};
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.Parameter != null)
+            {
+                _pitcherId = (int) e.Parameter;
+            }
+            if (_pitcherId == -1)
+            {
+                Frame.Navigate(typeof (MainPage));
+            }
         }
     }
 }
