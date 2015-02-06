@@ -17,6 +17,7 @@ namespace PitchTraxDataAccessUnitTests
         public static void SetUpForTests(TestContext tc)
         {
             _dbConnection = new SQLiteConnection(Windows.Storage.ApplicationData.Current.LocalFolder.Path + @"\PitchTraxTest.db");
+            
         }
 
         [TestMethod]
