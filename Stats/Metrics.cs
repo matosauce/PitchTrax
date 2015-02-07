@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Statistics
+namespace Stats
 {
     public static class Metrics
     {

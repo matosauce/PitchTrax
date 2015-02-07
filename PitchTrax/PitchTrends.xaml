@@ -10,11 +10,12 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Charting:Chart x:Name="LineChart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Width="1003" Height="693">
-            <Charting:LineSeries  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
+            <Charting:LineSeries Title ="Logged Data"  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
+            <Charting:LineSeries Title ="Trend"  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
         </Charting:Chart>
         <ComboBox Name ="Type" HorizontalAlignment="Left" Margin="1088,54,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Type_SelectionChanged" />
         <ComboBox Name ="Statistic" HorizontalAlignment="Left" Margin="1224,54,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Statistic_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="1224,735,0,0" TextWrapping="Wrap" Text="Hot/Cold Zones >" VerticalAlignment="Top" Height="23" Width="95"/>
+        <Button Content="Hot/Cold Zones" HorizontalAlignment="Left" Margin="1175,723,0,0" VerticalAlignment="Top" Height="38" Width="169" Click="Button_Click"/>
 
     </Grid>
 </Page>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Statistics
+namespace Stats
 {
     //http://www.codeproject.com/Articles/318126/Naive-Bayes-Classifier
     public static class MathFunction

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics;
 
-namespace Statistics
+namespace Stats
 {
-    public class LineFitting
+    public static class LineFitting
     {
         //Return example: {intercept, ax, bx^2, ... }
-        public double[] FitLine(double[] x, double[] y, int order)
+        public static  double[] FitLine(double[] x, double[] y, int order)
         {
             if (order != 1) return Fit.Polynomial(x, y, order);
             var data =  Fit.Line(x, y);
             return new[]{data.Item1, data.Item2};
         }
 
-        public double RSquared(double[] equation, double[] xValues, double[] yValues)
+        public static double RSquared(double[] equation, double[] xValues, double[] yValues)
         {
             var equationValues = new List<double>();
             foreach (var value in xValues)

@@ -59,12 +59,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Statistics\Statistics.csproj">
-      <Project>{3c5fda82-813b-454b-8975-07f7d4c8fa57}</Project>
-      <Name>Statistics</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
