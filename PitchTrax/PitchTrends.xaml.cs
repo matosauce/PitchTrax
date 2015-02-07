@@ -47,14 +47,9 @@ namespace PitchTrax
                     var trendLine =
                         LineFitting.FitLine(points.Select(x => x.Index).ToArray(),
                             points.Select(x => x.Velocity).ToArray(), 1).ToList();
-                    var trends = new List<double>();
-                    for (var i = 0; i < points.Count; i++)
-                    {
-                        trends.Add(i*trendLine[1] + trendLine[0]);
-                    }
                     if (trend != null)
                         trend.ItemsSource =
-                            trends.Select((pitch, index) => new {Index = (double) index + 1, Velocity = pitch}).ToList();
+                            GetTrendLine(trendLine, points.Count).Select((pitch, index) => new {Index = (double) index + 1, Velocity = pitch}).ToList();
                 }
                 lineSeries.ItemsSource = points;
             }
@@ -69,18 +64,23 @@ namespace PitchTrax
                     var trendLine =
                         LineFitting.FitLine(points.Select(x => x.Index).ToArray(), points.Select(x => x.Break).ToArray(),
                             1).ToList();
-                    var trends = new List<double>();
-                    for (var i = 0; i < points.Count; i++)
-                    {
-                        trends.Add(i*trendLine[1] + trendLine[0]);
-                    }
                     if (trend != null)
                         trend.ItemsSource =
-                            trends.Select((pitch, index) => new {Index = (double) index + 1, Break = pitch}).ToList();
+                            GetTrendLine(trendLine, points.Count).Select((pitch, index) => new {Index = (double) index + 1, Break = pitch}).ToList();
                 }
                 lineSeries.ItemsSource = points;
             }
         }
+
+        private static IEnumerable<double> GetTrendLine(IList<double> trendLineFormula, int length)
+        {
+            var trends = new List<double>();
+            for (var i = 0; i < length; i++)
+            {
+                trends.Add(i * trendLineFormula[1] +trendLineFormula[0]);
+            }
+            return trends;
+        } 
 
         private static void SetAxis(LineSeries series, string dependent)
         {
@@ -123,7 +123,7 @@ namespace PitchTrax
         }
 
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (_pitcherId != ErrorInt)
                 Frame.Navigate(typeof(HotColdZone), _pitcherId);
