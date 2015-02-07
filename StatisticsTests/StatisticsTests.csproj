@@ -52,12 +52,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ClassifierTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrendlineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Stats\Stats.csproj">
+      <Project>{331f7df1-2cee-414b-9400-c11b93d35547}</Project>
+      <Name>Stats</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
