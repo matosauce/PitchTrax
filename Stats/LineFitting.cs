@@ -8,6 +8,8 @@ namespace Stats
     public static class LineFitting
     {
         //Return example: {intercept, ax, bx^2, ... }
+        //We only use the linear trend in this project so far.
+        //If project stays in development, other orders will be useful.
         public static  double[] FitLine(double[] x, double[] y, int order)
         {
             if (order != 1) return Fit.Polynomial(x, y, order);
@@ -15,6 +17,8 @@ namespace Stats
             return new[]{data.Item1, data.Item2};
         }
 
+        //Useful if product stays in development.
+        //Not used yet.
         public static double RSquared(double[] equation, double[] xValues, double[] yValues)
         {
             var equationValues = new List<double>();

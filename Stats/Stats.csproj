@@ -35,8 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="LineFitting.cs" />
-    <Compile Include="MathFunction.cs" />
-    <Compile Include="Metrics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
