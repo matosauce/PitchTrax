@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using PitchTrax.Controllers;
@@ -41,15 +42,21 @@ namespace PitchTrax
                 SetAxis(trend, "Velocity");
                 var points =
                     pitches.Select((pitch, index) => new {Index = (double)index + 1, Velocity = (double)pitch.Velocity}).ToList();
-                var trendLine = LineFitting.FitLine(points.Select(x => x.Index).ToArray(), points.Select(x => x.Velocity).ToArray(), 1).ToList();
-                var trends = new List<double>();
-                for (var i = 0; i < points.Count; i++)
+                if (points.Count > 1)
                 {
-                    trends.Add(i*trendLine[1] + trendLine[0]);
+                    var trendLine =
+                        LineFitting.FitLine(points.Select(x => x.Index).ToArray(),
+                            points.Select(x => x.Velocity).ToArray(), 1).ToList();
+                    var trends = new List<double>();
+                    for (var i = 0; i < points.Count; i++)
+                    {
+                        trends.Add(i*trendLine[1] + trendLine[0]);
+                    }
+                    if (trend != null)
+                        trend.ItemsSource =
+                            trends.Select((pitch, index) => new {Index = (double) index + 1, Velocity = pitch}).ToList();
                 }
                 lineSeries.ItemsSource = points;
-                if (trend != null)
-                    trend.ItemsSource = trends.Select((pitch, index) => new { Index = (double)index + 1, Velocity = pitch }).ToList();
             }
             else if ((string) Statistic.SelectedItem == "Break")
             {
@@ -57,15 +64,21 @@ namespace PitchTrax
                 SetAxis(trend, "Break");
                 var points =
                     pitches.Select((pitch, index) => new { Index = (double)index + 1, Break = (double)pitch.Break }).ToList();
-                var trendLine = LineFitting.FitLine(points.Select(x => x.Index).ToArray(), points.Select(x => x.Break).ToArray(), 1).ToList();
-                var trends = new List<double>();
-                for (var i = 0; i < points.Count; i++)
+                if (points.Count > 1)
                 {
-                    trends.Add(i * trendLine[1] + trendLine[0]);
+                    var trendLine =
+                        LineFitting.FitLine(points.Select(x => x.Index).ToArray(), points.Select(x => x.Break).ToArray(),
+                            1).ToList();
+                    var trends = new List<double>();
+                    for (var i = 0; i < points.Count; i++)
+                    {
+                        trends.Add(i*trendLine[1] + trendLine[0]);
+                    }
+                    if (trend != null)
+                        trend.ItemsSource =
+                            trends.Select((pitch, index) => new {Index = (double) index + 1, Break = pitch}).ToList();
                 }
                 lineSeries.ItemsSource = points;
-                if (trend != null)
-                    trend.ItemsSource = trends.Select((pitch, index) => new { Index = (double)index + 1, Break = pitch }).ToList();
             }
         }
 
@@ -114,6 +127,11 @@ namespace PitchTrax
         {
             if (_pitcherId != ErrorInt)
                 Frame.Navigate(typeof(HotColdZone), _pitcherId);
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (MainPage));
         }
     }
 }

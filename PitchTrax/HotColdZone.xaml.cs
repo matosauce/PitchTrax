@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 
@@ -95,6 +96,11 @@ namespace PitchTrax
                 _pitcherId = (int)e.Parameter;
             }
             FillZoneColors();
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (PitchTrends), _pitcherId);
         }
     }
 }

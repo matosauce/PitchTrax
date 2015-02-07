@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button Name="BackButton" Click="BackButton_OnClick" Content=" &lt; Back" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="250"/>

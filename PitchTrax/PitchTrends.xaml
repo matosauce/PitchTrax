@@ -3,16 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     x:Class="PitchTrax.PitchTrends"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <Charting:Chart x:Name="LineChart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Width="1003" Height="693">
-            <Charting:LineSeries Title ="Logged Data"  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
-            <Charting:LineSeries Title ="Trend"  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
-        </Charting:Chart>
+        <Button Content=" &lt; Back" Click="BackButton_OnClick" VerticalAlignment="Top"/>
+        <charting:Chart x:Name="LineChart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,25,0,0" Width="1003" Height="693">
+            <charting:LineSeries Title ="Logged Data"  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
+            <charting:LineSeries Title ="Trend"  HorizontalAlignment="Left" Height="693" Margin="25,25,0,0" VerticalAlignment="Top" Width="1003"/>
+        </charting:Chart>
         <ComboBox Name ="Type" HorizontalAlignment="Left" Margin="1088,54,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Type_SelectionChanged" />
         <ComboBox Name ="Statistic" HorizontalAlignment="Left" Margin="1224,54,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Statistic_SelectionChanged"/>
         <Button Content="Hot/Cold Zones" HorizontalAlignment="Left" Margin="1175,723,0,0" VerticalAlignment="Top" Height="38" Width="169" Click="Button_Click"/>
