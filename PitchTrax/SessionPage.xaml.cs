@@ -5,7 +5,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using PitchTrax.Controllers;
 using PitchTrax.Models;
-using WinRTXamlToolkit.Controls.Extensions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -144,7 +143,7 @@ namespace PitchTrax
             pitchGrid.Children.Add(pitchTypeNameTextBlock);
             pitchGrid.Children.Add(velocityTextBlock);
 
-            SessionHistoryPanel.Children.Insert(1, pitchGrid);
+            SessionHistoryPanel.Children.Insert(indexAfterHeader, pitchGrid);
         }
 
         private static int GetZoneNumber(Button button)

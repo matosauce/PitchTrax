@@ -155,6 +155,8 @@ namespace PitchTrax
 
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(FirstName.Text) || string.IsNullOrEmpty(LastName.Text))
+                return;
 
             var pitcherId = _controller.InsertPitcher(PitcherId.Text, FirstName.Text,
                 LastName.Text, JerseyNumber.Text, ((LeftRadioButton.IsChecked ?? false) ? "L" : "R"));
@@ -168,6 +170,7 @@ namespace PitchTrax
             _controller.SaveNewPitchTypesToPitcher(pitcherId, knownPitchIds);
 
             RefreshPitcherList();
+            PitcherId.Text = pitcherId.ToString();
         }
 
         private void StartSessionButton_OnClick(object sender, RoutedEventArgs e)

@@ -123,7 +123,7 @@ namespace PitchTrax
         }
 
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (_pitcherId != ErrorInt)
                 Frame.Navigate(typeof(HotColdZone), _pitcherId);
